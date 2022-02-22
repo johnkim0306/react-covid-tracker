@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, CardContent, Typography } from "@material-ui/core";
 import "./InfoBox.css";
+import CountUp from "react-countup";
 
 function InfoBox({ title, cases, total, active, isRed, ...props }) {
   console.log(title, active);
@@ -21,6 +22,14 @@ function InfoBox({ title, cases, total, active, isRed, ...props }) {
 
         <Typography className="infoBox__total" color="textSecondary">
           {total} Total
+        </Typography>
+        <Typography variant="h5" component="h2">
+              <CountUp
+                start={0}
+                end={999999}
+                duration={2.75}
+                separator=","
+              />
         </Typography>
       </CardContent>
     </Card>

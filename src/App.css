@@ -2,6 +2,40 @@
   margin: 0;
 }
 
+.navbar {
+  position: sticky;
+  height: 100%;
+  min-width: 200px;
+  width: 200px;
+
+  top: 2.5rem;
+  left: 100px;
+  color: black;
+  background-color: white;
+  padding: 75px 0px;
+}
+
+.button {
+  transition-duration: 0.4s;
+  border-radius: 8px;
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #4CAF50; /* Green */
+  color: white;
+}
+
+
+
 body {
   background-color: #f5f6fa;
 }
@@ -35,7 +69,12 @@ body {
 }
 
 .app__left {
-  flex: 0.9;
+  flex: 0.3 ;
+
+}
+.app__right{
+  flex: 0.5 ;
+
 }
 
 .app__information > h3 {

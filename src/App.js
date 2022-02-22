@@ -9,10 +9,12 @@ import {
 } from "@material-ui/core";
 import InfoBox from "./InfoBox";
 import LineGraph from "./LineGraph";
+import Chart from "./Chart";
 import Table from "./Table";
 import { sortData, prettyPrintStat } from "./util";
 import numeral from "numeral";
 import Map from "./Map";
+import axios from "axios";
 import "leaflet/dist/leaflet.css";
 
 const App = () => {
@@ -26,61 +28,81 @@ const App = () => {
   const [mapZoom, setMapZoom] = useState(3);
 
   useEffect(() => {
-    fetch("https://disease.sh/v3/covid-19/all")
-      .then((response) => response.json())
-      .then((data) => {
-        setCountryInfo(data);
-      });
+    const getWorldData = async () => {
+      const { data } = await axios.get("https://disease.sh/v3/covid-19/all");
+      setCountryInfo(data);
+    };
+
+    getWorldData();
   }, []);
 
   useEffect(() => {
     const getCountriesData = async () => {
-      fetch("https://disease.sh/v3/covid-19/countries")
-        .then((response) => response.json())
-        .then((data) => {
-          const countries = data.map((country) => ({
-            name: country.country,
-            value: country.countryInfo.iso2,
-          }));
-          let sortedData = sortData(data);
-          setCountries(countries);
-          setMapCountries(data);
-          setTableData(sortedData);
-        });
+      const { data } = await axios.get(
+        "https://disease.sh/v3/covid-19/countries"
+      );
+      console.log(data);
+
+      const countries = data.map((country) => ({
+        name: country.country,          // United States, United Kindom
+        value: country.countryInfo.iso2,  // striping UK, USA, FR
+      }));
+
+      let sortedData = sortData(data);
+      setCountries(countries);
+      setMapCountries(data);
+      setTableData(sortedData);
     };
 
     getCountriesData();
   }, []);
 
-  console.log(casesType);
+  console.log(countryInfo);
 
-  const onCountryChange = async (e) => {
-    const countryCode = e.target.value;
+  const onCountryChange = async (country) => {
+    console.log("onCountryChange satrting")
+
+    const countryCode = await country;
 
     const url =
       countryCode === "worldwide"
         ? "https://disease.sh/v3/covid-19/all"
         : `https://disease.sh/v3/covid-19/countries/${countryCode}`;
-    await fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        setInputCountry(countryCode);
-        setCountryInfo(data);
-        setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
-        setMapZoom(4);
-      });
+
+    const { data } = await axios.get(url);
+
+    setInputCountry(countryCode);
+    setCountryInfo(data);
+    setMapZoom(4);
+    setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
+  
   };
 
   return (
     <div className="app">
+  
+      <div className="navbar">
+        <section>
+          <img src="/covid-19-virus.jpeg" alt="image" width="200px"/>
+          <h1>CORONA LIVE</h1>
+          <button class="button">Button</button>
+          <button class="button">Button</button>
+        </section>
+        <nav>
+          <header>swag</header>
+          <ul>
+            <li> <a className= "nav-link" href="#japan"> Japan</a></li>
+          </ul>
+        </nav>
+      </div>
+  
       <div className="app__left">
         <div className="app__header">
-          <h1>COVID-19 Tracker</h1>
           <FormControl className="app__dropdown">
             <Select
               variant="outlined"
               value={country}
-              onChange={onCountryChange}
+              onChange={(e) => onCountryChange(e.target.value)}
             >
               <MenuItem value="worldwide">Worldwide</MenuItem>
               {countries.map((country) => (
@@ -113,6 +135,8 @@ const App = () => {
             cases={prettyPrintStat(countryInfo.todayDeaths)}
             total={numeral(countryInfo.deaths).format("0.0a")}
           />
+  
+          <Chart casesType={casesType} recovered={countryInfo.todayRecovered} deaths={countryInfo.todayDeaths} cases={countryInfo.todayCases}/>
         </div>
         <Map
           countries={mapCountries}
@@ -128,6 +152,8 @@ const App = () => {
             <Table countries={tableData} />
             <h3>Worldwide new {casesType}</h3>
             <LineGraph casesType={casesType} />
+            <h3>Total cases</h3>
+
           </div>
         </CardContent>
       </Card>
