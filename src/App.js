@@ -11,6 +11,7 @@ import InfoBox from "./InfoBox";
 import LineGraph from "./LineGraph";
 import Chart from "./Chart";
 import Table from "./Table";
+import Table2 from "./Table2";
 import { sortData, prettyPrintStat } from "./util";
 import numeral from "numeral";
 import Map from "./Map";
@@ -26,6 +27,7 @@ const App = () => {
   const [casesType, setCasesType] = useState("cases");
   const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: -40.4796 });
   const [mapZoom, setMapZoom] = useState(3);
+  const [isActive, setisActive] = useState(true);
 
   useEffect(() => {
     const getWorldData = async () => {
@@ -49,6 +51,7 @@ const App = () => {
       }));
 
       let sortedData = sortData(data);
+      console.log(sortedData);
       setCountries(countries);
       setMapCountries(data);
       setTableData(sortedData);
@@ -78,6 +81,14 @@ const App = () => {
   
   };
 
+  const activateCountryInfo = () => {
+    setisActive(state => false)
+  }
+
+  const activateCases = () => {
+    setisActive(state => true)
+  }
+
   return (
     <div className="app">
   
@@ -85,8 +96,8 @@ const App = () => {
         <section>
           <img src="/covid-19-virus.jpeg" alt="image" width="200px"/>
           <h1>CORONA LIVE</h1>
-          <button class="button">Button</button>
-          <button class="button">Button</button>
+          <button class="button" onClick={activateCases}>Cases</button>
+          <button class="button" onClick={activateCountryInfo}>Death</button>
         </section>
         <nav>
           <header>swag</header>
@@ -149,7 +160,9 @@ const App = () => {
         <CardContent>
           <div className="app__information">
             <h3>Live Cases by Country</h3>
-            <Table countries={tableData} />
+
+            {isActive ? <Table countries={tableData} /> : <Table2 countries={tableData} /> }
+
             <h3>Worldwide new {casesType}</h3>
             <LineGraph casesType={casesType} />
             <h3>Total cases</h3>

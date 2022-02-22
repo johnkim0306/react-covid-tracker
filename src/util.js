@@ -35,6 +35,17 @@ export const sortData = (data) => {
   return sortedData;
 };
 
+export const sortData2 = (data) => {
+  data.sort((a, b) => {
+    if (a.deaths > b.deaths) {
+      return -1;
+    } else {
+      return 1;
+    }
+  });
+  return data;
+};
+
 export const prettyPrintStat = (stat) =>
   stat ? `+${numeral(stat).format("0.0a")}` : "+0";
 

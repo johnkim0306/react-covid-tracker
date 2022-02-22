@@ -19,7 +19,7 @@
   transition-duration: 0.4s;
   border-radius: 8px;
   border: none;
-  color: white;
+  color: red;
   padding: 20px;
   text-align: center;
   text-decoration: none;
@@ -69,11 +69,11 @@ body {
 }
 
 .app__left {
-  flex: 0.3 ;
+  flex: 0.3;
 
 }
 .app__right{
-  flex: 0.5 ;
+  flex: 0.5;
 
 }
 
