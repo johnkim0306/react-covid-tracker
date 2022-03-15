@@ -5,7 +5,7 @@ import { sortData2 } from "./util";
 
 function Table2({ countries }) {
 
-    console.log(countries);
+    console.log("Table2 on: ", countries);
     //let countries2 = sortData2(countries);
 
     countries.sort( (a,b) => (a.deaths > b.deaths ? -1 : 1 ));

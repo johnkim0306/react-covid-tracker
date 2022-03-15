@@ -1,21 +1,24 @@
 import React, { useState, useEffect } from "react";
-import "./App.css";
+import "./App.scss";
 import {
   MenuItem,
   FormControl,
   Select,
   Card,
   CardContent,
+  Paper
 } from "@material-ui/core";
 import InfoBox from "./InfoBox";
 import LineGraph from "./LineGraph";
 import Chart from "./Chart";
 import Table from "./Table";
 import Table2 from "./Table2";
+import DataTable from './components/DataTable';
 import { sortData, prettyPrintStat } from "./util";
 import numeral from "numeral";
 import Map from "./Map";
 import axios from "axios";
+import Header from "./components/Header";
 import "leaflet/dist/leaflet.css";
 
 const App = () => {
@@ -64,6 +67,7 @@ const App = () => {
 
   const onCountryChange = async (country) => {
     console.log("onCountryChange satrting")
+    console.log(country);
 
     const countryCode = await country;
 
@@ -89,29 +93,49 @@ const App = () => {
     setisActive(state => true)
   }
 
+  const activateCanada = () => {
+    console.log("activating Canada data");
+    onCountryChange('CA')
+  }
+
   return (
     <div className="app">
-  
-      <div className="navbar">
-        <section>
-          <img src="/covid-19-virus.jpeg" alt="image" width="200px"/>
-          <h1>CORONA LIVE</h1>
-          <button class="button" onClick={activateCases}>Cases</button>
-          <button class="button" onClick={activateCountryInfo}>Death</button>
-        </section>
-        <nav>
-          <header>swag</header>
-          <ul>
-            <li> <a className= "nav-link" href="#japan"> Japan</a></li>
-          </ul>
-        </nav>
+      <div className="app__top">
+        <Header />
       </div>
-  
-      <div className="app__left">
+
+      <div className="middle">
+
+      
+
+      <div className="container">
+        <div className="sidebar">
+          <section className="title">
+            <a>CORONA LIVE</a>
+
+          </section>
+          <img src="/covid-19-virus.jpeg" alt="image" width="130px"/>
+          <section>
+            <div className="btn-group">
+              <button onClick={activateCanada}>Canada</button>
+              <button onClick={activateCases}>Cases</button>
+              <button onClick={activateCountryInfo}>Death</button>
+            </div>
+          </section>
+          <nav>
+            <header>swag</header>
+            <ul>
+              <li> <a className= "nav-link" href="#japan"> Japan</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+
+      <div className="app__body">
         <div className="app__header">
           <FormControl className="app__dropdown">
             <Select
-              variant="outlined"
+              variant="outlined"  
               value={country}
               onChange={(e) => onCountryChange(e.target.value)}
             >
@@ -122,6 +146,25 @@ const App = () => {
             </Select>
           </FormControl>
         </div>
+      
+        <div className="app__body-map">
+          <Card className="app__right">
+            <CardContent>
+              <div className="app__information">
+                <h3>Live Cases by Country</h3>
+                <DataTable countries={tableData}  />
+              </div>
+            </CardContent>
+          </Card>
+
+          <Map
+            countries={mapCountries}
+            casesType={casesType}
+            center={mapCenter}
+            zoom={mapZoom}
+          />
+        </div>
+
         <div className="app__stats">
           <InfoBox
             onClick={(e) => setCasesType("cases")}
@@ -146,30 +189,25 @@ const App = () => {
             cases={prettyPrintStat(countryInfo.todayDeaths)}
             total={numeral(countryInfo.deaths).format("0.0a")}
           />
-  
-          <Chart casesType={casesType} recovered={countryInfo.todayRecovered} deaths={countryInfo.todayDeaths} cases={countryInfo.todayCases}/>
         </div>
-        <Map
-          countries={mapCountries}
-          casesType={casesType}
-          center={mapCenter}
-          zoom={mapZoom}
-        />
-      </div>
-      <Card className="app__right">
-        <CardContent>
-          <div className="app__information">
-            <h3>Live Cases by Country</h3>
 
-            {isActive ? <Table countries={tableData} /> : <Table2 countries={tableData} /> }
+        {isActive ? <Table countries={tableData} /> : <Table2 countries={tableData} /> }
+        
+        <div className="article">
 
-            <h3>Worldwide new {casesType}</h3>
+          <h3>Worldwide new {casesType}</h3>
             <LineGraph casesType={casesType} />
-            <h3>Total cases</h3>
+          <h3>Total cases</h3>
 
+          <div className="graph">
+            <Chart casesType={casesType} recovered={countryInfo.todayRecovered} deaths={countryInfo.todayDeaths} cases={countryInfo.todayCases}/>
           </div>
-        </CardContent>
-      </Card>
+
+        </div>
+
+      </div>
+    </div>
+
     </div>
   );
 };
