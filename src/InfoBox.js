@@ -4,7 +4,7 @@ import "./InfoBox.css";
 import CountUp from "react-countup";
 
 function InfoBox({ title, cases, total, active, isRed, ...props }) {
-  console.log(title, active);
+  //console.log(title, active);
   return (
     <Card
       onClick={props.onClick}

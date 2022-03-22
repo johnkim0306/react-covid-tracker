@@ -20,7 +20,7 @@ const columns = [
 
 export default function DataTable({ countries }) {
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(15);
+  const [rowsPerPage, setRowsPerPage] = React.useState(25);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -31,7 +31,7 @@ export default function DataTable({ countries }) {
     setPage(0);
   };
 
-  console.log("Table on: ", countries);
+  //console.log("Table on: ", countries);
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>

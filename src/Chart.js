@@ -53,18 +53,15 @@ const options = {
   };
 
 const Chart = ({ casesType = "cases", cases, recovered, deaths } ) => {
-    console.log("sex!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", cases);
   const [data, setData] = useState({});
   useEffect(() => {
     const getCountriesData = async () => {
       const { data } = await axios.get(
         "https://disease.sh/v3/covid-19/historical/all?lastdays=160"
       );
-      console.log(data);
+
 
       let chartData = buildChartData(data, casesType);
-
-      console.log(chartData);
 
       setData(chartData);
     };
@@ -74,9 +71,6 @@ const Chart = ({ casesType = "cases", cases, recovered, deaths } ) => {
 
   const buildChartData = (data, casesType) => {
     let chartData = [];
-    console.log(data);
-    console.log(casesType);
-    console.log(data.deaths);
     for (let date in data.cases) {
         let newDataPoint = {
           x: date,
@@ -113,8 +107,6 @@ const Chart = ({ casesType = "cases", cases, recovered, deaths } ) => {
   );
 
   const PieChart2 = (
-    console.log("PiecHART ACTIVE!!!!!!"),
-    console.log(cases),
     cases ? 
       <Pie
         data={{

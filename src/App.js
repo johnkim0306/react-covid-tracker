@@ -8,8 +8,12 @@ import {
   CardContent,
   Paper
 } from "@material-ui/core";
+import Button from '@mui/material/Button';
+import SendIcon from '@mui/icons-material/Send';
+
 import InfoBox from "./InfoBox";
 import LineGraph from "./LineGraph";
+import GraphCanada from "./GraphCanada";
 import Chart from "./Chart";
 import Table from "./Table";
 import Table2 from "./Table2";
@@ -24,6 +28,7 @@ import "leaflet/dist/leaflet.css";
 const App = () => {
   const [country, setInputCountry] = useState("worldwide");
   const [countryInfo, setCountryInfo] = useState({});
+  const [countryName, setCountryName] = useState("worldwide");
   const [countries, setCountries] = useState([]);
   const [mapCountries, setMapCountries] = useState([]);
   const [tableData, setTableData] = useState([]);
@@ -46,7 +51,6 @@ const App = () => {
       const { data } = await axios.get(
         "https://disease.sh/v3/covid-19/countries"
       );
-      console.log(data);
 
       const countries = data.map((country) => ({
         name: country.country,          // United States, United Kindom
@@ -54,7 +58,6 @@ const App = () => {
       }));
 
       let sortedData = sortData(data);
-      console.log(sortedData);
       setCountries(countries);
       setMapCountries(data);
       setTableData(sortedData);
@@ -63,11 +66,8 @@ const App = () => {
     getCountriesData();
   }, []);
 
-  console.log(countryInfo);
-
   const onCountryChange = async (country) => {
     console.log("onCountryChange satrting")
-    console.log(country);
 
     const countryCode = await country;
 
@@ -80,10 +80,17 @@ const App = () => {
 
     setInputCountry(countryCode);
     setCountryInfo(data);
+    setCountryName(data.country);
     setMapZoom(4);
-    setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
+    if (countryCode === "worldwide") {
+      setMapCenter({ lat: 34.80746, lng: -40.4796 })
+      setMapZoom(3);
+    } else {
+      setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
+    }
   
   };
+  console.log(countryName);
 
   const activateCountryInfo = () => {
     setisActive(state => false)
@@ -112,14 +119,17 @@ const App = () => {
         <div className="sidebar">
           <section className="title">
             <a>CORONA LIVE</a>
-
           </section>
+
           <img src="/covid-19-virus.jpeg" alt="image" width="130px"/>
           <section>
             <div className="btn-group">
               <button onClick={activateCanada}>Canada</button>
               <button onClick={activateCases}>Cases</button>
               <button onClick={activateCountryInfo}>Death</button>
+              <Button variant="contained" endIcon={<SendIcon />}>
+                Send
+              </Button>
             </div>
           </section>
           <nav>
@@ -128,6 +138,16 @@ const App = () => {
               <li> <a className= "nav-link" href="#japan"> Japan</a></li>
             </ul>
           </nav>
+
+          <Card>
+            <CardContent>
+              <div className="app__information">
+                <h3>swag</h3>
+              </div>
+            </CardContent>            
+          </Card>
+
+
         </div>
       </div>
 
@@ -194,9 +214,9 @@ const App = () => {
         {isActive ? <Table countries={tableData} /> : <Table2 countries={tableData} /> }
         
         <div className="article">
+          <h3>{countryName} new {casesType}</h3>
+            {countryName==="Canada" ? <GraphCanada casesType={casesType} countryName={countryName} /> : <LineGraph casesType={casesType} countryName={countryName} />     }
 
-          <h3>Worldwide new {casesType}</h3>
-            <LineGraph casesType={casesType} />
           <h3>Total cases</h3>
 
           <div className="graph">

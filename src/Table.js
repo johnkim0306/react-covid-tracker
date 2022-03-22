@@ -3,18 +3,19 @@ import "./Table.css";
 import numeral from "numeral";
 
 function Table({ countries }) {
-
-  console.log("Table on: ", countries);
-
   return (
     <div className="table">
       {countries.map((country) => (
-        <tr>
-          <td>{country.country}</td>
-          <td>
-            <strong>{numeral(country.cases).format("0,0")}</strong>
-          </td>
-        </tr>
+        <table>
+          <tbody>
+            <tr>
+              <td>{country.country}</td>
+              <td>
+                <strong>{numeral(country.cases).format("0,0")}</strong>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       ))}
     </div>
   );

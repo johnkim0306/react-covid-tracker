@@ -59,7 +59,7 @@ const buildChartData = (data, casesType) => {
       if (lastDataPoint) {
         let newDataPoint = {
           x: date,
-          y: data[casesType][date] - lastDataPoint,
+          y: data["timeline"][casesType][date] - lastDataPoint,
         };
         chartData.push(newDataPoint);
       }
@@ -75,7 +75,7 @@ const buildChartData = (data, casesType) => {
         };
         chartData.push(newDataPoint);
       }
-      lastDataPoint = data[casesType][date];
+      lastDataPoint = data["timeline"][casesType][date];
     }
   }
 
@@ -83,13 +83,13 @@ const buildChartData = (data, casesType) => {
 };
 
 
-function LineGraph({ casesType, countryName }) {
+function GraphCanada({ casesType, countryName }) {
   const [data, setData] = useState({});
 
   useEffect(() => { 
     console.log("useffect getting called")
     const fetchData = async () => {
-      await fetch("https://disease.sh/v3/covid-19/historical/all?lastdays=120")
+      await fetch("https://disease.sh/v3/covid-19/historical/canada?lastdays=120")
         .then((response) => {
           return response.json();
         })
@@ -126,4 +126,4 @@ function LineGraph({ casesType, countryName }) {
   );
 }
 
-export default LineGraph;
+export default GraphCanada;
