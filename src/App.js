@@ -67,8 +67,6 @@ const App = () => {
   }, []);
 
   const onCountryChange = async (country) => {
-    console.log("onCountryChange satrting")
-
     const countryCode = await country;
 
     const url =
@@ -105,6 +103,12 @@ const App = () => {
     onCountryChange('CA')
   }
 
+  const activateWorldWide = () => {
+    console.log("activating Canada data");
+    onCountryChange('worldwide')
+  }
+
+
   return (
     <div className="app">
       <div className="app__top">
@@ -124,25 +128,21 @@ const App = () => {
           <img src="/covid-19-virus.jpeg" alt="image" width="130px"/>
           <section>
             <div className="btn-group">
-              <button onClick={activateCanada}>Canada</button>
-              <button onClick={activateCases}>Cases</button>
-              <button onClick={activateCountryInfo}>Death</button>
-              <Button variant="contained" endIcon={<SendIcon />}>
-                Send
-              </Button>
+              <Button variant="outlined" color="secondary" size="large" onClick={activateCanada}>Canada</Button>
+              <Button variant="outlined" color="secondary" size="large" onClick={activateWorldWide}>Worldwide</Button>
             </div>
           </section>
-          <nav>
-            <header>swag</header>
-            <ul>
-              <li> <a className= "nav-link" href="#japan"> Japan</a></li>
-            </ul>
-          </nav>
 
+          <Button variant="outlined" color="secondary" size="large" onClick={activateCases}>Cases</Button>
+          <Button variant="outlined" color="secondary" size="large" onClick={activateCountryInfo}>Death</Button>
+
+          <Button variant="contained" endIcon={<SendIcon />}>
+                Send
+              </Button>
           <Card>
             <CardContent>
               <div className="app__information">
-                <h3>swag</h3>
+                <h3>money</h3>
               </div>
             </CardContent>            
           </Card>
