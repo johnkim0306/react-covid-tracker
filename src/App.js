@@ -26,7 +26,7 @@ import { sortData, prettyPrintStat } from "./util";
 import numeral from "numeral";
 import Map from "./Map";
 import axios from "axios";
-import Header from "./components/Header";
+import Header from "./components/Header/Header";
 import "leaflet/dist/leaflet.css";
 
 const App = () => {
