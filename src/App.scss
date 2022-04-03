@@ -2,27 +2,44 @@
 .sidebar {
   position: sticky;
   height: 450px;
-  min-width: 130px;
-  width: 150px;
+  min-width: 140px;
+  width: 170px;
 
   top: 5.5rem;
   left: 2.5rem;
   color: black;
-  background-color: white;
+  background-color: #f5f6fa;;
   padding: 25px 0px;
   display: flex;
   flex-direction: column;
 
-  &.title {
+  &__title {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 23px;
+    font-size: 11px;
+    font-family: 'Roboto', sans-serif;
     height: 50px;
-    border: 1px solid #ccc;
-    border-radius: 11px;
-    margin: 10px;
+    border: 0.0625rem solid #DEDEDE;
+    background-color: white;;
+  
+    &--text {
+      background-image: linear-gradient(
+        45deg,
+        #F18F43 50%, 
+        #8B9862 50%, 
+      );
+      background-size: 100%;
+      background-repeat: repeat;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; 
+    }
+    
+    border-radius: 0.7rem;
+    margin: 1.4375rem 0;
     box-shadow: 1px 1px;
+    width: 95%;
+    height:400px;
   }
 }
 
@@ -37,22 +54,25 @@
 }
 
 .btn-group {
-  border-radius: 10px;
+  border-radius: .625rem;
   border: none;
-  margin: 2rem 0;
+  margin: 1rem 0;
 
   button {
+    height: 80px;
     width: 95%;
     transition-duration: 0.4s;
-    border: none;
-    color: red;
-    background-color:	#F8F8F8;
+    border-radius: 0.7rem;
+    box-shadow: 1px 1px;
+    border: 0.0625rem solid #DEDEDE;
+    background-color: white;
+    color: black;
     padding: 20px;
     text-align: center;
     text-decoration: none;
     display: block;
     font-size: 16px;
-    margin: 0 2px;
+    margin: 5px 2px;
     cursor: pointer;
   }
 
@@ -70,21 +90,21 @@ body {
   justify-content: space-around;
   flex-direction: column;
   background-color: #f5f6fa;
-  padding: 10px;
+  padding: 3px;
 
   &__top {
     background: #3b5998;
     display: flex;
     align-items: center;
     flex-direction: column;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     justify-content: space-between;
   }
 
   &__header {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     justify-content: space-between;    
   }
 

@@ -3,11 +3,11 @@
 }
 
 .infoBox:not(:last-child) {
-  margin-right: 10px;
+  margin-right: .625rem;
 }
 
 .infoBox--selected {
-  border-top: 10px solid greenyellow;
+  border-top: .625rem solid greenyellow;
 }
 
 .infoBox--red {

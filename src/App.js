@@ -18,6 +18,10 @@ import Chart from "./Chart";
 import Table from "./Table";
 import Table2 from "./Table2";
 import DataTable from './components/DataTable';
+
+import Papers from "./components/Papers/Papers";
+
+
 import { sortData, prettyPrintStat } from "./util";
 import numeral from "numeral";
 import Map from "./Map";
@@ -88,7 +92,6 @@ const App = () => {
     }
   
   };
-  console.log(countryName);
 
   const activateCountryInfo = () => {
     setisActive(state => false)
@@ -115,17 +118,19 @@ const App = () => {
         <Header />
       </div>
 
-      <div className="middle">
 
-      
+      <Papers />
+
+      <br />
+
+      <div className="middle">
 
       <div className="container">
         <div className="sidebar">
-          <section className="title">
-            <a>CORONA LIVE</a>
-          </section>
+          <div className="sidebar__title">
+            <h1 className="sidebar__title--text"> CORONA LIVE </h1>
+          </div>
 
-          <img src="/covid-19-virus.jpeg" alt="image" width="130px"/>
           <section>
             <div className="btn-group">
               <Button variant="outlined" color="secondary" size="large" onClick={activateCanada}>Canada</Button>
@@ -211,20 +216,18 @@ const App = () => {
           />
         </div>
 
-        {isActive ? <Table countries={tableData} /> : <Table2 countries={tableData} /> }
-        
         <div className="article">
           <h3>{countryName} new {casesType}</h3>
             {countryName==="Canada" ? <GraphCanada casesType={casesType} countryName={countryName} /> : <LineGraph casesType={casesType} countryName={countryName} />     }
-
           <h3>Total cases</h3>
 
           <div className="graph">
             <Chart casesType={casesType} recovered={countryInfo.todayRecovered} deaths={countryInfo.todayDeaths} cases={countryInfo.todayCases}/>
           </div>
-
         </div>
 
+        {isActive ? <Table countries={tableData} /> : <Table2 countries={tableData} /> }
+        
       </div>
     </div>
 
