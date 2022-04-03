@@ -121,7 +121,6 @@ const App = () => {
 
       <Papers />
 
-      <br />
 
       <div className="middle">
 

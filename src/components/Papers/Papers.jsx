@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'flex-end',
     padding: theme.spacing(2),
     height: theme.spacing(15),
-    margin: theme.spacing(2),
+    margin: theme.spacing(1),
     background: 'linear-gradient(to right bottom, #E0C3FC, #8EC5FC)',
     borderRadius: 12
   },
@@ -26,6 +26,10 @@ const useStyles = makeStyles(theme => ({
     display:'flex'
   },
   papers__calendar: {
+    display:'flex',
+    flexDirection: 'column'
+  },
+  papers__calendar__text: {
     display:'flex'
   },
   paperContainer: {
@@ -60,11 +64,16 @@ export default () => {
             </div>
 
             <div className={classes.papers__calendar}>
-              <CalendarMonthRoundedIcon/>
-              <Typography color="textSecondary">
-                    {" "}
-                    {new Date().toLocaleString() + ""}
-              </Typography>
+              <div>
+                <Typography variant="h5" style={{color: 'white'}}>Last Updated:</Typography>
+              </div>
+              <div className={classes.papers__calendar__text}>
+                <CalendarMonthRoundedIcon/>
+                <Typography color="textSecondary">
+                      {" "}
+                      {new Date().toLocaleString() + ""}
+                </Typography>
+              </div>
             </div>
           </div>
         </Paper>
