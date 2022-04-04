@@ -27,6 +27,7 @@ import numeral from "numeral";
 import Map from "./Map";
 import axios from "axios";
 import Header from "./components/Header/Header";
+import Sidebar from "./components/Sidebar/Sidebar";
 import "leaflet/dist/leaflet.css";
 
 const App = () => {
@@ -125,34 +126,12 @@ const App = () => {
       <div className="middle">
 
       <div className="container">
-        <div className="sidebar">
-          <div className="sidebar__title">
-            <h1 className="sidebar__title--text"> CORONA LIVE </h1>
-          </div>
-
-          <section>
-            <div className="btn-group">
-              <Button variant="outlined" color="secondary" size="large" onClick={activateCanada}>Canada</Button>
-              <Button variant="outlined" color="secondary" size="large" onClick={activateWorldWide}>Worldwide</Button>
-            </div>
-          </section>
-
-          <Button variant="outlined" color="secondary" size="large" onClick={activateCases}>Cases</Button>
-          <Button variant="outlined" color="secondary" size="large" onClick={activateCountryInfo}>Death</Button>
-
-          <Button variant="contained" endIcon={<SendIcon />}>
-                Send
-              </Button>
-          <Card>
-            <CardContent>
-              <div className="app__information">
-                <h3>money</h3>
-              </div>
-            </CardContent>            
-          </Card>
-
-
-        </div>
+        <Sidebar
+          activateCanada={activateCanada}
+          activateWorldWide={activateWorldWide}
+          activateCases={activateCases}
+          activateCountryInfo={activateCountryInfo}
+        />
       </div>
 
       <div className="app__body">
