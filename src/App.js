@@ -218,8 +218,6 @@ const App = () => {
         <div className="article">
           <h3>{countryName} new {casesType}</h3>
             {countryName==="Canada" ? <GraphCanada casesType={casesType} countryName={countryName} /> : <LineGraph casesType={casesType} countryName={countryName} />     }
-          <h3>Total cases</h3>
-
           <div className="graph">
             <Chart casesType={casesType} recovered={countryInfo.todayRecovered} deaths={countryInfo.todayDeaths} cases={countryInfo.todayCases}/>
           </div>

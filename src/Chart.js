@@ -102,6 +102,8 @@ const Chart = ({ casesType = "cases", cases, recovered, deaths } ) => {
           },
         ],
       }}
+      height="150px"
+      width="1200px"
       options={options}
     />
   );
@@ -130,13 +132,17 @@ const Chart = ({ casesType = "cases", cases, recovered, deaths } ) => {
           },
           ],
         }}
+        height="150px"
+        width="1200px"
       /> : null
   );
 
   return (
     <div >
-        {lineChart}
-        {PieChart2}
+      <h3>Today's Case</h3>
+      {PieChart2}
+      <h3>Total cases</h3>
+      {lineChart}
     </div>
   );
 };
