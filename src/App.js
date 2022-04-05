@@ -17,8 +17,7 @@ import GraphCanada from "./GraphCanada";
 import Chart from "./Chart";
 import Table from "./Table";
 import Table2 from "./Table2";
-import DataTable from './components/DataTable';
-
+import DataTable from './components/Table/DataTable';
 import Papers from "./components/Papers/Papers";
 
 
