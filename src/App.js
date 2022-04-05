@@ -119,9 +119,7 @@ const App = () => {
         <Header />
       </div>
 
-
       <Papers />
-
 
       <div className="middle">
 

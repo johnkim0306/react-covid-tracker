@@ -129,6 +129,14 @@ body {
     }
   }
 
+  &__header {
+    flex-direction: column;
+  }
+
+  &__dropdown {
+    width: 15.25rem;
+  }
+
   &__right {
     display: flex;
     margin-right: 1rem;
