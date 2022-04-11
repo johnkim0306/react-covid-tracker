@@ -6,11 +6,7 @@ import {
   Select,
   Card,
   CardContent,
-  Paper
 } from "@material-ui/core";
-import Button from '@mui/material/Button';
-import SendIcon from '@mui/icons-material/Send';
-
 import InfoBox from "./InfoBox";
 import LineGraph from "./LineGraph";
 import GraphCanada from "./GraphCanada";
@@ -196,8 +192,6 @@ const App = () => {
         </div>
 
         {isActive ? <Table countries={tableData} /> : <Table2 countries={tableData} /> }
-        <img src="/images/disease2.png"></img>
-        
       </div>
     </div>
 
