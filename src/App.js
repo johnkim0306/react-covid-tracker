@@ -109,8 +109,10 @@ const App = () => {
 
   return (
     <div className="app">
-        <Header />
-        <Papers />
+
+      <Header />
+
+      <Papers />
 
       <div className="middle">
 

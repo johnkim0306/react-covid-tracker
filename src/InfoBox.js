@@ -23,14 +23,6 @@ function InfoBox({ title, cases, total, active, isRed, ...props }) {
         <Typography className="infoBox__total" color="textSecondary">
           {total} Total
         </Typography>
-        <Typography variant="h5" component="h2">
-              <CountUp
-                start={0}
-                end={999999}
-                duration={2.75}
-                separator=","
-              />
-        </Typography>
       </CardContent>
     </Card>
   );
