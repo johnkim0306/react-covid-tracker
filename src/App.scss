@@ -10,6 +10,7 @@
   color: black;
   background-color: #f5f6fa;;
   padding: 25px 0px;
+  margin-top: 1.25rem;
   display: flex;
   flex-direction: column;
 
@@ -91,15 +92,6 @@ body {
   flex-direction: column;
   background-color: #f5f6fa;
   padding: 3px;
-
-  &__top {
-    background: #3b5998;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    margin-bottom: 10px;
-    justify-content: space-between;
-  }
 
   &__header {
     display: flex;

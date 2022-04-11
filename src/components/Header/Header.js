@@ -1,10 +1,14 @@
 import React from "react";
+import './Header.scss';
+import logo from "../../images/disease.png";
 
 const Header = () => {
   return (
-    <header className="header">
-      <h1>Hello</h1>      
-    </header>
+    <nav className="nav">
+      <img src={logo} className="nav--icon"></img>
+      <h1 className="nav--logo_text">COVID-19 Worldwide</h1>
+      <h2 className="nav--title">Hello</h2>        
+    </nav>
   );
 };
 

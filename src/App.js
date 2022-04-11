@@ -111,14 +111,10 @@ const App = () => {
     onCountryChange('worldwide')
   }
 
-
   return (
     <div className="app">
-      <div className="app__top">
         <Header />
-      </div>
-
-      <Papers />
+        <Papers />
 
       <div className="middle">
 
@@ -200,6 +196,7 @@ const App = () => {
         </div>
 
         {isActive ? <Table countries={tableData} /> : <Table2 countries={tableData} /> }
+        <img src="/images/disease2.png"></img>
         
       </div>
     </div>
