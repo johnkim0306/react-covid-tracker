@@ -1,9 +1,9 @@
 .table {
-  margin-top: 20px;
+  margin-top: 1.25rem;
   overflow: scroll;
   color: #6a5d5d;
   background-color: white;
-  height: 400px;
+  height: 25rem;
 }
 
 .table tr {
