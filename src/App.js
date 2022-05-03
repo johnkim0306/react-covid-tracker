@@ -13,16 +13,14 @@ import GraphCanada from "./GraphCanada";
 import Chart from "./Chart";
 import Table from "./Table";
 import Table2 from "./Table2";
-import DataTable from './components/Table/DataTable';
-import Papers from "./components/Papers/Papers";
+
+import {DataTable, Papers, Header, Sidebar, Contact } from './components';
 
 
 import { sortData, prettyPrintStat } from "./util";
 import numeral from "numeral";
 import Map from "./Map";
 import axios from "axios";
-import Header from "./components/Header/Header";
-import Sidebar from "./components/Sidebar/Sidebar";
 import "leaflet/dist/leaflet.css";
 
 const App = () => {
@@ -194,6 +192,7 @@ const App = () => {
         </div>
 
         {isActive ? <Table countries={tableData} /> : <Table2 countries={tableData} /> }
+        <Contact />
       </div>
     </div>
 

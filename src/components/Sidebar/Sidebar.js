@@ -10,7 +10,7 @@ import './Sidebar.scss';
 
 const useStyles = makeStyles(theme => ({
   button: {
-    height: theme.spacing(5),
+    height: theme.spacing(7),
     variant: 'outlined',
     color: 'secondary',
     width: '100%'
@@ -43,9 +43,9 @@ const Sidebar = (props) => {
     <Button variant="outlined" color="secondary" size="large" onClick={props.activateCases}>Cases</Button>
     <Button variant="outlined" color="secondary" size="large" onClick={props.activateCountryInfo}>Death</Button>
 
-    <Button variant="contained" endIcon={<SendIcon />}>
-      Send
-    </Button>
+    <a href="#contact">
+      <Button variant="outlined" color="secondary" size="large" className={classes.button} endIcon={<SendIcon />}>Contact</Button>
+    </a>
   </div>
   );
 };
