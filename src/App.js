@@ -11,12 +11,7 @@ import InfoBox from "./InfoBox";
 import LineGraph from "./LineGraph";
 import GraphCanada from "./GraphCanada";
 import Chart from "./Chart";
-import Table from "./Table";
-import Table2 from "./Table2";
-
 import {DataTable, Papers, Header, Sidebar, Contact } from './components';
-
-
 import { sortData, prettyPrintStat } from "./util";
 import numeral from "numeral";
 import Map from "./Map";
@@ -119,7 +114,6 @@ const App = () => {
           activateCanada={activateCanada}
           activateWorldWide={activateWorldWide}
           activateCases={activateCases}
-          activateCountryInfo={activateCountryInfo}
         />
       </div>
 
@@ -191,7 +185,6 @@ const App = () => {
           </div>
         </div>
 
-        {isActive ? <Table countries={tableData} /> : <Table2 countries={tableData} /> }
         <Contact />
       </div>
     </div>
