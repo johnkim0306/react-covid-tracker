@@ -70,3 +70,19 @@
       border-bottom: none; /* Prevent double borders */
     }
   }
+
+@media screen and (max-width: 1420px) {
+  .sidebar {
+      display: none;
+  }
+}
+
+@media screen and (max-width: 600px) {
+    .sidebar {
+      display: none;
+    }
+
+    .btn-group {
+        display: none;
+    }
+}

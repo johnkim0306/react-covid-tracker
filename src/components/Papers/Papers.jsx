@@ -42,7 +42,11 @@ const useStyles = makeStyles(theme => ({
   largeIcon: {
     marginBottom: '-1.1rem',
     marginRight: '-0.6rem'
+  },
+  "@media (max-width: 1200px)": {
+    width: "86%"
   }
+
 }));
 
 export default () => {
