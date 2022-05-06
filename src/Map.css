@@ -5,6 +5,14 @@
   padding: 0.3rem;
   border-radius: 1.25rem;  
   box-shadow: 0 0 .5rem -0.25rem rgba(0, 0, 0, 0.5);
+
+  @media screen and (max-width: 600px) {
+    margin-top: 1rem;
+  }
+
+  @media screen and (max-width: 1300px) {
+    margin-top: 1rem;
+  }
 }
 
 .map .leaflet-container {

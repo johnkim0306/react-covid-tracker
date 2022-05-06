@@ -9,9 +9,8 @@ import {
 } from "@material-ui/core";
 import InfoBox from "./InfoBox";
 import LineGraph from "./LineGraph";
-import GraphCanada from "./GraphCanada";
-import Chart from "./Chart";
-import {DataTable, Papers, Header, Sidebar, Contact } from './components';
+import GraphCanada from "./components/Graph/GraphCanada";
+import { DataTable, Papers, Header, Sidebar, Contact, Chart, Graph} from "./components";
 import { sortData, prettyPrintStat } from "./util";
 import numeral from "numeral";
 import Map from "./Map";
@@ -46,8 +45,8 @@ const App = () => {
       );
 
       const countries = data.map((country) => ({
-        name: country.country,          // United States, United Kindom
-        value: country.countryInfo.iso2,  // striping UK, USA, FR
+        name: country.country, // United States, United Kindom
+        value: country.countryInfo.iso2, // striping UK, USA, FR
       }));
 
       let sortedData = sortData(data);
@@ -74,121 +73,126 @@ const App = () => {
     setCountryName(data.country);
     setMapZoom(4);
     if (countryCode === "worldwide") {
-      setMapCenter({ lat: 34.80746, lng: -40.4796 })
+      setMapCenter({ lat: 34.80746, lng: -40.4796 });
       setMapZoom(3);
     } else {
       setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
     }
-  
   };
 
   const activateCountryInfo = () => {
-    setisActive(state => false)
-  }
+    setisActive((state) => false);
+  };
 
   const activateCases = () => {
-    setisActive(state => true)
-  }
+    setisActive((state) => true);
+  };
 
   const activateCanada = () => {
     console.log("activating Canada data");
-    onCountryChange('CA')
-  }
+    onCountryChange("CA");
+  };
 
   const activateWorldWide = () => {
     console.log("activating Canada data");
-    onCountryChange('worldwide')
-  }
+    onCountryChange("worldwide");
+  };
 
   return (
     <div className="app">
-
       <Header />
-
       <Papers />
-
-      <div className="middle">
-
-      <div className="container">
-        <Sidebar
-          activateCanada={activateCanada}
-          activateWorldWide={activateWorldWide}
-          activateCases={activateCases}
-        />
-      </div>
-
-      <div className="app__body">
-        <div className="app__header">
-          <FormControl className="app__dropdown">
-            <Select
-              variant="outlined"  
-              value={country}
-              onChange={(e) => onCountryChange(e.target.value)}
-            >
-              <MenuItem value="worldwide">Worldwide</MenuItem>
-              {countries.map((country) => (
-                <MenuItem value={country.value}>{country.name}</MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </div>
-      
-        <div className="app__body-map">
-          <Card className="app__right">
-            <CardContent>
-              <div className="app__information">
-                <h3>Live Cases by Country</h3>
-                <DataTable countries={tableData}  />
-              </div>
-            </CardContent>
-          </Card>
-
-          <Map
-            countries={mapCountries}
-            casesType={casesType}
-            center={mapCenter}
-            zoom={mapZoom}
+      <div className="app__middle">
+        <div className="container">
+          <Sidebar
+            activateCanada={activateCanada}
+            activateWorldWide={activateWorldWide}
+            activateCases={activateCases}
           />
         </div>
 
-        <div className="app__stats">
-          <InfoBox
-            onClick={(e) => setCasesType("cases")}
-            title="Coronavirus Cases"
-            isRed
-            active={casesType === "cases"}
-            cases={prettyPrintStat(countryInfo.todayCases)}
-            total={numeral(countryInfo.cases).format("0.0a")}
-          />
-          <InfoBox
-            onClick={(e) => setCasesType("recovered")}
-            title="Recovered"
-            active={casesType === "recovered"}
-            cases={prettyPrintStat(countryInfo.todayRecovered)}
-            total={numeral(countryInfo.recovered).format("0.0a")}
-          />
-          <InfoBox
-            onClick={(e) => setCasesType("deaths")}
-            title="Deaths"
-            isRed
-            active={casesType === "deaths"}
-            cases={prettyPrintStat(countryInfo.todayDeaths)}
-            total={numeral(countryInfo.deaths).format("0.0a")}
-          />
-        </div>
-
-        <div className="article">
-          <h3>{countryName} new {casesType}</h3>
-            {countryName==="Canada" ? <GraphCanada casesType={casesType} countryName={countryName} /> : <LineGraph casesType={casesType} countryName={countryName} />     }
-          <div className="graph">
-            <Chart casesType={casesType} recovered={countryInfo.todayRecovered} deaths={countryInfo.todayDeaths} cases={countryInfo.todayCases}/>
+        <div className="app__body">
+          <div className="app__header">
+            <FormControl className="app__dropdown">
+              <Select
+                variant="outlined"
+                value={country}
+                onChange={(e) => onCountryChange(e.target.value)}
+              >
+                <MenuItem value="worldwide">Worldwide</MenuItem>
+                {countries.map((country) => (
+                  <MenuItem value={country.value}>{country.name}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
           </div>
+
+          <div className="app__body-map">
+            <Card className="app__right">
+              <CardContent>
+                <div className="app__information">
+                  <h3>Live Cases by Country</h3>
+                  <DataTable countries={tableData} />
+                </div>
+              </CardContent>
+            </Card>
+
+            <Map
+              countries={mapCountries}
+              casesType={casesType}
+              center={mapCenter}
+              zoom={mapZoom}
+            />
+          </div>
+
+          <div className="app__stats">
+            <InfoBox
+              onClick={(e) => setCasesType("cases")}
+              title="Coronavirus Cases"
+              isRed
+              active={casesType === "cases"}
+              cases={prettyPrintStat(countryInfo.todayCases)}
+              total={numeral(countryInfo.cases).format("0.0a")}
+            />
+            <InfoBox
+              onClick={(e) => setCasesType("recovered")}
+              title="Recovered"
+              active={casesType === "recovered"}
+              cases={prettyPrintStat(countryInfo.todayRecovered)}
+              total={numeral(countryInfo.recovered).format("0.0a")}
+            />
+            <InfoBox
+              onClick={(e) => setCasesType("deaths")}
+              title="Deaths"
+              isRed
+              active={casesType === "deaths"}
+              cases={prettyPrintStat(countryInfo.todayDeaths)}
+              total={numeral(countryInfo.deaths).format("0.0a")}
+            />
+          </div>
+
+          <div className="app__graph">
+            <h3>
+              {countryName} new {casesType}
+            </h3>
+            {countryName === "Canada" ? (
+              <GraphCanada casesType={casesType} countryName={countryName} />
+            ) : (
+              <LineGraph casesType={casesType} countryName={countryName} />
+            )}
+            <div className="graph">
+              <Chart
+                casesType={casesType}
+                recovered={countryInfo.todayRecovered}
+                deaths={countryInfo.todayDeaths}
+                cases={countryInfo.todayCases}
+              />
+            </div>
+          </div>
+
+          <Contact />
         </div>
-
-        <Contact />
       </div>
-    </div>
-
     </div>
   );
 };

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Line, Pie } from "react-chartjs-2";
 import axios from "axios";
 import numeral from "numeral";
+import './chart.scss'
 
 const options = {
     legend: {
@@ -15,6 +16,7 @@ const options = {
         radius: 0,
       },
     },
+    responsive: true,
     maintainAspectRatio: false,
     tooltips: {
       mode: "index",
@@ -51,6 +53,12 @@ const options = {
       ],
     },
   };
+
+let style = {
+  position: "relative",
+  width:"100%",
+  height:"40vh"
+}
 
 const Chart = ({ casesType = "cases", cases, recovered, deaths } ) => {
   const [data, setData] = useState({});
@@ -102,13 +110,13 @@ const Chart = ({ casesType = "cases", cases, recovered, deaths } ) => {
           },
         ],
       }}
-      height="150px"
-      width="1200px"
+      width={1000}
+      height={300}
       options={options}
     />
   );
 
-  const PieChart2 = (
+  const PieChart = (
     cases ? 
       <Pie
         data={{
@@ -132,17 +140,22 @@ const Chart = ({ casesType = "cases", cases, recovered, deaths } ) => {
           },
           ],
         }}
-        height="150px"
-        width="1200px"
+        style={style}
+        width={1000}
+        height={300}
       /> : null
   );
 
   return (
-    <div >
-      <h3>Today's Case</h3>
-      {PieChart2}
-      <h3>Total cases</h3>
-      {lineChart}
+    <div className="container">
+      <div className="container__piechart">
+        <h3>Today's Case</h3>
+        {PieChart}
+      </div>
+      <div className="container__linechart">
+        <h3>Total cases</h3>
+        {lineChart}
+      </div>
     </div>
   );
 };

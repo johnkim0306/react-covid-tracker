@@ -43,8 +43,14 @@ const useStyles = makeStyles(theme => ({
     marginBottom: '-1.1rem',
     marginRight: '-0.6rem'
   },
-  "@media (max-width: 1200px)": {
-    width: "86%"
+  "@media (max-width: 1420px)": {
+    width: "100%"
+  },
+  "@media (max-width: 600px)": {
+    width: "100%"
+  },
+  '@media (min-width: 780px)' : {
+    width: '80%'
   }
 
 }));

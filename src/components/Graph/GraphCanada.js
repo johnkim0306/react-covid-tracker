@@ -11,6 +11,7 @@ const options = {
       radius: 0,
     },
   },
+  responsive: true,
   maintainAspectRatio: false,
   tooltips: {
     mode: "index",

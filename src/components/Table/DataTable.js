@@ -7,6 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import { makeStyles } from "@material-ui/core/styles";
 import "./DataTable.scss";
 import numeral from "numeral";  
 
@@ -18,7 +19,15 @@ const columns = [
   { id: 'deaths', label: 'Deaths', align: 'center' }
 ];
 
+const useStyles = makeStyles(theme => ({
+  paper: {
+    overflow: 'hidden',
+    width: '100%'
+  },
+}));
+
 export default function DataTable({ countries }) {
+  const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(25);
 
@@ -34,8 +43,8 @@ export default function DataTable({ countries }) {
   //console.log("Table on: ", countries);
 
   return (
-    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <TableContainer sx={{ maxHeight: 440 }}>
+    <Paper  sx={{overflow: 'hidden' }}className={classes.paper} >
+      <TableContainer sx={{ maxHeight: 920 }}>
         <Table stickyHeader aria-label="sticky table">
 
           <TableHead>

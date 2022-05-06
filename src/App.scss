@@ -1,10 +1,5 @@
 @import "scss/_variables";
 
-.middle {
-  display: flex;
-  justify-content: space-around;
-}
-
 body {
   background-color: #f5f6fa;
 }
@@ -23,12 +18,24 @@ body {
     justify-content: space-between;    
   }
 
+  &__middle {
+    display: flex;
+
+    @media screen and (max-width: 1300px) {
+      justify-content: center;
+    }
+  
+    @media screen and (max-width: 600px) {
+      justify-content: center;
+    }
+  }
+
   &__stats {
     display: flex;
     justify-content: space-between;
     padding: 1.5625rem 0rem;
 
-    @media screen and (max-width: 1420px) {
+    @media screen and (max-width: 1300px) {
       width: $container-width-md;
     }
   
@@ -53,18 +60,26 @@ body {
       text-align: center;
 
       @media screen and (max-width: 1300px) {
-        width: $container-width-md;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        height: 100vh;
+        width: auto;
       }
     
       @media screen and (max-width: 600px) {
         width: $container-width-sm;
       }
+    }
 
-
+    @media screen and (max-width: 1300px) {
+      flex-direction: column;
+      width: $container-width-md;
     }
   
-
-
+    @media screen and (max-width: 600px) {
+      width: $container-width-sm;
+    }
   }
 
   &__header {
@@ -93,10 +108,15 @@ body {
       margin-top: 1rem;
     }
   }
+
+  &__graph {
+    width: 100%;
+  }
 }
 
-@media (max-width: 62rem) {
+@media (max-width: 1300px) {
   .app {
     flex-direction: column;
+    align-items: center;
   }
 }
