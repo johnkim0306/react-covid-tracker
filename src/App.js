@@ -7,13 +7,9 @@ import {
   Card,
   CardContent,
 } from "@material-ui/core";
-import InfoBox from "./InfoBox";
-import LineGraph from "./LineGraph";
-import GraphCanada from "./components/Graph/GraphCanada";
-import { DataTable, Papers, Header, Sidebar, Contact, Chart, Graph} from "./components";
+import { DataTable, Papers, Header, Sidebar, Contact, Chart, GraphCanada, InfoBox, Map, LineGraph} from "./components";
 import { sortData, prettyPrintStat } from "./util";
 import numeral from "numeral";
-import Map from "./Map";
 import axios from "axios";
 import "leaflet/dist/leaflet.css";
 

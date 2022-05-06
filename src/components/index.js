@@ -4,4 +4,7 @@ export { default as Sidebar } from './Sidebar/Sidebar';
 export { default as DataTable } from './Table/DataTable';
 export { default as Contact } from './Contact/Contact';
 export { default as Chart } from './Chart/Chart';
-export { default as Graph } from './Graph/GraphCanada';
+export { default as GraphCanada } from './Graph/GraphCanada';
+export { default as InfoBox } from './Infobox/InfoBox';
+export { default as Map } from './Map/Map';
+export { default as LineGraph } from './LineGraph/LineGraph';
