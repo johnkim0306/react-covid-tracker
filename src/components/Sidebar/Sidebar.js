@@ -39,9 +39,6 @@ const Sidebar = (props) => {
       </div>
     </section>
 
-    <Button variant="outlined" color="secondary" size="large" onClick={props.activateCases}>Cases</Button>
-    <Button variant="outlined" color="secondary" size="large" onClick={props.activateCountryInfo}>Death</Button>
-
     <a href="#contact">
       <Button variant="outlined" color="secondary" size="large" className={classes.button} endIcon={<SendIcon />}>Contact</Button>
     </a>

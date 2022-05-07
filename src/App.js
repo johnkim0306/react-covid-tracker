@@ -23,7 +23,6 @@ const App = () => {
   const [casesType, setCasesType] = useState("cases");
   const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: -40.4796 });
   const [mapZoom, setMapZoom] = useState(3);
-  const [isActive, setisActive] = useState(true);
 
   useEffect(() => {
     const getWorldData = async () => {
@@ -76,14 +75,6 @@ const App = () => {
     }
   };
 
-  const activateCountryInfo = () => {
-    setisActive((state) => false);
-  };
-
-  const activateCases = () => {
-    setisActive((state) => true);
-  };
-
   const activateCanada = () => {
     console.log("activating Canada data");
     onCountryChange("CA");
@@ -103,7 +94,6 @@ const App = () => {
           <Sidebar
             activateCanada={activateCanada}
             activateWorldWide={activateWorldWide}
-            activateCases={activateCases}
           />
         </div>
 
