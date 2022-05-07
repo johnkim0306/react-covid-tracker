@@ -1,9 +1,13 @@
-.container {
+.chart__container {
     margin-top: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 .container__piechart {
+    margin-bottom: 1rem;
+}
+
+.container__linechart {
     margin-bottom: 1rem;
 }

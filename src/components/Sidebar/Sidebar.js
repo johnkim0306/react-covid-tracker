@@ -7,7 +7,6 @@ import LanguageRoundedIcon from '@mui/icons-material/LanguageRounded';
 import { makeStyles } from "@material-ui/core/styles";
 import './Sidebar.scss';
 
-
 const useStyles = makeStyles(theme => ({
   button: {
     height: theme.spacing(7),
@@ -35,7 +34,7 @@ const Sidebar = (props) => {
 
     <section>
       <div className="btn-group">
-        <Button variant="outlined" color="secondary" size="large" href="http://www.google.com" className={classes.button}><GitHubIcon />Github</Button>
+        <Button variant="outlined" color="secondary" size="large" href="https://github.com/johnkim0306/react-covid-tracker" className={classes.button}><GitHubIcon />Github</Button>
         <Button variant="outlined" color="secondary" size="large" href="http://www.google.com" className={classes.button}><LanguageRoundedIcon />Portfolio</Button>
       </div>
     </section>

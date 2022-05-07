@@ -1,7 +1,6 @@
 import React from "react";
 import { Card, CardContent, Typography } from "@material-ui/core";
-import "./InfoBox.css";
-import CountUp from "react-countup";
+import "./InfoBox.scss";
 
 function InfoBox({ title, cases, total, active, isRed, ...props }) {
   //console.log(title, active);

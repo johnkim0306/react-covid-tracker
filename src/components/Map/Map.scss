@@ -1,3 +1,5 @@
+@import "../../scss/_variables";
+
 .map {
   height: 30.625rem;
   width: 38.75rem;
@@ -5,14 +7,6 @@
   padding: 0.3rem;
   border-radius: 1.25rem;  
   box-shadow: 0 0 .5rem -0.25rem rgba(0, 0, 0, 0.5);
-
-  @media screen and (max-width: 600px) {
-    margin-top: 1rem;
-  }
-
-  @media screen and (max-width: 1300px) {
-    margin-top: 1rem;
-  }
 }
 
 .map .leaflet-container {
@@ -48,4 +42,21 @@
 .info-deaths {
   font-size: 1rem;
   margin-top: .3125rem;
+}
+
+@media screen and (max-width: 600px) {
+  .map {
+    margin-top: 1rem;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .map {
+    display: flex;
+    height: $container-width-lg;
+    width: $container-width-lg;
+    margin-top: 1rem;
+  }
 }

@@ -27,7 +27,6 @@ const options = {
         },
       },
     },
-    responsive: false,
     scales: {
       xAxes: [
         {
@@ -57,7 +56,7 @@ const options = {
 let style = {
   position: "relative",
   width:"100%",
-  height:"40vh"
+  height:"50vh"
 }
 
 const Chart = ({ casesType = "cases", cases, recovered, deaths } ) => {
@@ -67,7 +66,6 @@ const Chart = ({ casesType = "cases", cases, recovered, deaths } ) => {
       const { data } = await axios.get(
         "https://disease.sh/v3/covid-19/historical/all?lastdays=160"
       );
-
 
       let chartData = buildChartData(data, casesType);
 
@@ -147,12 +145,12 @@ const Chart = ({ casesType = "cases", cases, recovered, deaths } ) => {
   );
 
   return (
-    <div className="container">
-      <div className="container__piechart">
+    <div className="container chart__container ">
+      <div style={style} className="container__piechart">
         <h3>Today's Case</h3>
         {PieChart}
       </div>
-      <div className="container__linechart">
+      <div style={style} className="container__linechart">
         <h3>Total cases</h3>
         {lineChart}
       </div>

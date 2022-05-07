@@ -12,9 +12,9 @@ import "./DataTable.scss";
 import numeral from "numeral";  
 
 const columns = [
-  { id: 'code', label: 'ISO\u00a0Code', minWidth: 50, algin: 'center' },
+  { id: 'code', label: 'ISO\u00a0Code', algin: 'center' },
   { id: 'country', label: 'Country' },
-  { id: 'cases', label: 'Cases', minWidth: 50, align: 'left', format: (value) => value.toLocaleString('en-US') },
+  { id: 'cases', label: 'Cases', align: 'left', format: (value) => value.toLocaleString('en-US') },
   { id: 'recovered', label: 'Recovered', align: 'center' },
   { id: 'deaths', label: 'Deaths', align: 'center' }
 ];
@@ -53,7 +53,6 @@ export default function DataTable({ countries }) {
                 <TableCell
                   key={column.id}
                   align={column.align}
-                  style={{ minWidth: column.minWidth }}
                 >
                   {column.label}
                 </TableCell>
