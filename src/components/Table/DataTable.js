@@ -44,7 +44,7 @@ export default function DataTable({ countries }) {
 
   return (
     <Paper  sx={{overflow: 'hidden' }}className={classes.paper} >
-      <TableContainer sx={{ maxHeight: 920 }}>
+      <TableContainer sx={{ maxHeight: 1220, width: '100%' }}>
         <Table stickyHeader aria-label="sticky table">
 
           <TableHead>
@@ -67,7 +67,7 @@ export default function DataTable({ countries }) {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={country.country}>
 
-                    <TableCell align="center" className="table-country" style={{ backgroundImage: `url(${country.countryInfo.flag})`}}>
+                    <TableCell align="center" rowSpan={1} className="table-country" style={{ backgroundImage: `url(${country.countryInfo.flag})`}}>
                         {country.countryInfo.iso2}
                     </TableCell>
 
