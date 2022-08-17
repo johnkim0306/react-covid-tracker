@@ -63,6 +63,7 @@ body {
     @media screen and (max-width: 1300px) {
       flex-direction: column;
       width: $container-width-md;
+      flex: 1 1 auto;
     }
   
     @media screen and (max-width: 600px) {
@@ -76,6 +77,7 @@ body {
   
       @media screen and (max-width: 1300px) {
         width: $container-width-md;
+        margin: 0 auto;
       }
     
       @media screen and (max-width: 600px) {
@@ -98,7 +100,7 @@ body {
 
   &__right {
     display: flex;
-    margin-right: 1rem;
+    //margin-right: 1rem;
 
     @media screen and (max-width: 600px) {
       width: 100%;
@@ -130,6 +132,13 @@ body {
   }
 }
 
+.MuiCard-root.MuiCard-root {
+  display: flex;
+  overflow: scroll;
+  align-content: center;
+  justify-content: center;
+}
+
 @media (max-width: 1300px) {
   .app {
     flex-direction: column;
@@ -142,5 +151,11 @@ body {
   .app {
     //align-items: center;
     width: 100%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    display: none;
   }
 }

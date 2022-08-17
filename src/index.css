@@ -16,4 +16,5 @@ code {
   width: 100%;
   min-height: 100vh;
   margin: 0 auto;
+  flex: 1 15 auto;
 }
