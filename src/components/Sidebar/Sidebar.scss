@@ -53,6 +53,7 @@
       width: 95%;
       transition-duration: 0.4s;
       border-radius: 0.7rem;
+      border-color: black;
       box-shadow: .0625rem .0625rem;
       border: 0.0625rem solid #DEDEDE;
       background-color: white;
@@ -69,7 +70,11 @@
     button:not(:last-child) {
       border-bottom: none; /* Prevent double borders */
     }
-  }
+}
+
+.btn-group-1 {
+  color: black;
+}
 
 @media screen and (max-width: 768px) {
   .sidebar {

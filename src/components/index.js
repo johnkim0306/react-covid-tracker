@@ -8,3 +8,4 @@ export { default as GraphCanada } from './Graph/GraphCanada';
 export { default as InfoBox } from './Infobox/InfoBox';
 export { default as Map } from './Map/Map';
 export { default as LineGraph } from './LineGraph/LineGraph';
+export { default as Footer } from './Footer/Footer';

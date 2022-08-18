@@ -7,7 +7,7 @@ import {
   Card,
   CardContent,
 } from "@material-ui/core";
-import { DataTable, Papers, Header, Sidebar, Contact, Chart, GraphCanada, InfoBox, Map, LineGraph} from "./components";
+import { DataTable, Papers, Header, Sidebar, Contact, Chart, GraphCanada, InfoBox, Map, LineGraph, Footer} from "./components";
 import { sortData, prettyPrintStat } from "./util";
 import numeral from "numeral";
 import axios from "axios";
@@ -177,6 +177,7 @@ const App = () => {
           </div>
 
           <Contact />
+          <Footer />
         </div>
       </div>
     </div>
