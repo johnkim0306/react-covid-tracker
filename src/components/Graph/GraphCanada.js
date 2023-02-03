@@ -52,56 +52,38 @@ const buildChartData = (data, casesType) => {
   let chartData = [];
   let lastDataPoint;
 
-  console.log(data);
+  let dates = 'timeline' in data ? data.timeline[casesType] : data[casesType];
 
-  if ('timeline' in data) {
-    console.log("data.timeline activated");
-    for (let date in data.timeline.cases) {
-      if (lastDataPoint) {
-        let newDataPoint = {
-          x: date,
-          y: data["timeline"][casesType][date] - lastDataPoint,
-        };
-        chartData.push(newDataPoint);
-      }
-      lastDataPoint = data["timeline"][casesType][date];
+  for (let date in dates) {
+    if (lastDataPoint) {
+      let newDataPoint = {
+        x: date,
+        y: dates[date] - lastDataPoint,
+      };
+      chartData.push(newDataPoint);
     }
-  }
-  else {
-    for (let date in data.cases) {
-      if (lastDataPoint) {
-        let newDataPoint = {
-          x: date,
-          y: data[casesType][date] - lastDataPoint,
-        };
-        chartData.push(newDataPoint);
-      }
-      lastDataPoint = data["timeline"][casesType][date];
-    }
+    lastDataPoint = dates[date];
   }
 
   return chartData;
 };
 
 
-function GraphCanada({ casesType, countryName }) {
-  const [data, setData] = useState({});
+const GraphCanada = ({ casesType, countryName }) => {
+  const [data, setData] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => { 
-    console.log("useffect getting called")
     const fetchData = async () => {
-      await fetch("https://disease.sh/v3/covid-19/historical/canada?lastdays=120")
-        .then((response) => {
-          return response.json();
-        })
-        .then((data) => {
-          console.log(data);
-          let chartData = buildChartData(data, casesType);
-          console.log(chartData);
-          setData(chartData);
-          console.log(chartData);
-          // buildChart(chartData);
-        });
+      try {
+        const response = await fetch("https://disease.sh/v3/covid-19/historical/canada?lastdays=120");
+        const jsonData = await response.json();
+        let chartData = buildChartData(jsonData, casesType);
+        setData(chartData);
+      } catch (error) {
+        console.error(error);
+        setError(error);
+      }
     };
 
     fetchData();
@@ -109,20 +91,24 @@ function GraphCanada({ casesType, countryName }) {
 
   return (
     <div>
-      {data?.length > 0 && (
-        <Line
-          data={{
-            datasets: [
-              {
-                backgroundColor: "rgba(204, 16, 52, 0.5)",
-                borderColor: "#CC1034",
-                data: data,
-              },
-            ],
-          }}
-          options={options}
-        />
-      )}
+      {error ? (
+          <div>An error occurred while fetching the data: {error.message}</div>
+        ) : data?.length > 0 ? (
+          <Line
+            data={{
+              datasets: [
+                {
+                  backgroundColor: "rgba(204, 16, 52, 0.5)",
+                  borderColor: "#CC1034",
+                  data
+                },
+              ],
+            }}
+            options={options}
+          />
+        ) : (
+          <div>Loading...</div>
+        )}
     </div>
   );
 }

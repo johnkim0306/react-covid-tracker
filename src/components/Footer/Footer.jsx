@@ -8,15 +8,15 @@ const Footer = () => {
             <div className="footer__container">
                 <div className="footer__icons">
                     <div className="footer__icons--wrapper">
-                        <div className="footer__icon">
-                            <a href="https://www.facebook.com/profile.php?id=100000925471875"> <FaFacebookF /></a>
-                        </div>
-                        <div className="footer__icon">
-                            <a href="https://www.linkedin.com/in/john-k-51a119129/" target="_blank"> <BsLinkedin /></a>
-                        </div>
-                        <div className="footer__icon">
-                            <a href="https://github.com/johnkim0306" target="_blank"> <FaGithub /></a>
-                        </div>
+                        <a href="https://www.facebook.com/profile.php?id=100000925471875" className="footer__icon">
+                            <FaFacebookF />
+                        </a>
+                        <a href="https://www.linkedin.com/in/john-k-51a119129/" target="_blank" className="footer__icon"> 
+                            <BsLinkedin />
+                        </a>
+                        <a href="https://github.com/johnkim0306" target="_blank" className="footer__icon">
+                            <FaGithub />
+                        </a>
                     </div>
                 </div>
                 <div className="footer__copyright">

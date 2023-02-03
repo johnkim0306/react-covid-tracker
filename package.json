@@ -15,7 +15,7 @@
     "axios": "^0.26.0",
     "chart.js": "^2.9.3",
     "leaflet": "^1.6.0",
-    "material-ui": "^1.0.0-beta.47",
+    "material-ui": "^0.15.0",
     "numeral": "^2.0.6",
     "react": "^17.0.2",
     "react-chartjs-2": "^2.9.0",
@@ -23,7 +23,7 @@
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
     "react-leaflet": "^2.7.0",
-    "react-scripts": "^3.4.1",
+    "react-scripts": "^5.0.1",
     "sass": "^1.49.9"
   },
   "scripts": {

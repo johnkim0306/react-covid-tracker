@@ -48,59 +48,37 @@ const options = {
 };
 
 const buildChartData = (data, casesType) => {
-  let chartData = [];
+  const chartData = [];
   let lastDataPoint;
+  const casesData = 'timeline' in data ? data.timeline[casesType] : data[casesType];
 
-  console.log(data);
-
-  if ('timeline' in data) {
-    console.log("data.timeline activated");
-    for (let date in data.timeline.cases) {
-      if (lastDataPoint) {
-        let newDataPoint = {
-          x: date,
-          y: data[casesType][date] - lastDataPoint,
-        };
-        chartData.push(newDataPoint);
-      }
-      lastDataPoint = data["timeline"][casesType][date];
+  for (let date in casesData) {
+    if (lastDataPoint) {
+      const newDataPoint = {
+        x: date,
+        y: casesData[date] - lastDataPoint,
+      };
+      chartData.push(newDataPoint);
     }
-  }
-  else {
-    for (let date in data.cases) {
-      if (lastDataPoint) {
-        let newDataPoint = {
-          x: date,
-          y: data[casesType][date] - lastDataPoint,
-        };
-        chartData.push(newDataPoint);
-      }
-      lastDataPoint = data[casesType][date];
-    }
+    lastDataPoint = casesData[date];
   }
 
   return chartData;
 };
 
 
-function LineGraph({ casesType, countryName }) {
+const LineGraph = ({ casesType}) =>  {
   const [data, setData] = useState({});
-
   useEffect(() => { 
-    console.log("useffect getting called")
     const fetchData = async () => {
-      await fetch("https://disease.sh/v3/covid-19/historical/all?lastdays=120")
-        .then((response) => {
-          return response.json();
-        })
-        .then((data) => {
-          console.log(data);
-          let chartData = buildChartData(data, casesType);
-          console.log(chartData);
-          setData(chartData);
-          console.log(chartData);
-          // buildChart(chartData);
-        });
+      try {
+        const response = await fetch("https://disease.sh/v3/covid-19/historical/all?lastdays=120")
+        const data = await response.json();
+        let chartData = buildChartData(data, casesType);
+        setData(chartData);
+      } catch (error) {
+        console.error(error);
+      }
     };
 
     fetchData();

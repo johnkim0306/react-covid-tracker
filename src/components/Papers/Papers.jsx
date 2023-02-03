@@ -62,21 +62,20 @@ theme.typography.h3 = {
     fontSize: '2rem',
   },
 };
+theme.typography.h5 = {
+  fontSize: '1.2rem',
+  '@media (max-width:600px)': {
+    fontSize: '1rem',
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: '2.4rem',
+  },
+};
 
 
 export default () => {
   const classes = useStyles();
   const isMobile = useMediaQuery("(max-width: 600px)");
-
-  theme.typography.h5 = {
-    fontSize: '1.2rem',
-    '@media (max-width:600px)': {
-      fontSize: '1rem',
-    },
-    [theme.breakpoints.up('md')]: {
-      fontSize: '2.4rem',
-    },
-  };
 
   return (
     <>

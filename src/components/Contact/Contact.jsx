@@ -4,6 +4,24 @@ import {MdOutlineEmail} from 'react-icons/md'
 import {RiMessengerLine} from 'react-icons/ri'
 import {BsWhatsapp} from 'react-icons/bs'
 
+const ContactOption = ({ icon, title, description, linkText, linkHref }) => (
+    <article className="contact__option">
+      {icon}
+      <h4>{title}</h4>
+      <h5>{description}</h5>
+      <a href={linkHref}>{linkText}</a>
+    </article>
+)
+
+const ContactForm = () => (
+    <form action="">
+        <input type="text" name='name' placeholder="Your Full Name" required />
+        <input type="email" name='email' placeholder="Your Email" required />
+        <textarea name="message" rows="7" placeholder="Your Message" required></textarea>
+        <button type='submit' className='btn btn-primary'> Send Message</button>
+    </form>
+)
+
 const Contact = () => {
     return (
             <section id='contact'>
@@ -11,31 +29,29 @@ const Contact = () => {
                 <h2>Contact Me</h2>
                 <div className="container contact__container">
                     <div className="contact__options">
-                        <article className="contact__option">
-                            <MdOutlineEmail className='contact__option-icon' />
-                            <h4>Email</h4>
-                            <h5>john.kim0306@gmail.com</h5>
-                            <a href="mailto:john.kim0306@gmail.com">Send a message</a>
-                        </article>
-                        <article className="contact__option">
-                            <RiMessengerLine className='contact__option-icon' />
-                            <h4>Messenger</h4>
-                            <h5>john kim</h5>
-                            <a href="https://m.me/100000925471875">Send a message</a>
-                        </article>
-                        <article className="contact__option">
-                            <BsWhatsapp className='contact__option-icon' />
-                            <h4>WhatsApp</h4>
-                            <h5>john.kim0306@gmail.com</h5>
-                            <a href="https://api.whatsapp.com/send?phone+15877773519">Send a message</a>
-                        </article>
+                    <ContactOption
+                        icon={<MdOutlineEmail className='contact__option-icon' />}
+                        title='Email'
+                        description='john.kim0306@gmail.com'
+                        linkText='Send a message'
+                        linkHref='mailto:john.kim0306@gmail.com'
+                    />
+                    <ContactOption
+                        icon={<RiMessengerLine className='contact__option-icon' />}
+                        title='Messenger'
+                        description='john kim'
+                        linkText='Send a message'
+                        linkHref='https://m.me/100000925471875'
+                    />
+                    <ContactOption
+                        icon={<BsWhatsapp className='contact__option-icon' />}
+                        title='WhatsApp'
+                        description='john.kim0306@gmail.com'
+                        linkText='Send a message'
+                        linkHref='https://api.whatsapp.com/send?phone+15877773519'
+                    />
                     </div>
-                    <form action="">
-                        <input type="text" name='name' placeholder="Your Full Name" required />
-                        <input type="email" name='email' placeholder="Your Email" required />
-                        <textarea name="message" rows="7" placeholder="Your Message" required></textarea>
-                        <button type='submit' className='btn btn-primary'> Send Message</button>
-                    </form>
+                    <ContactForm />
                 </div>
             </section>
     )

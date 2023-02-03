@@ -43,7 +43,6 @@ const options = {
             display: false,
           },
           ticks: {
-            // Include a dollar sign in the ticks
             callback: function (value, index, values) {
               return numeral(value).format("0a");
             },
@@ -51,6 +50,7 @@ const options = {
         },
       ],
     },
+    height: 500
   };
 
 let style = {
@@ -60,7 +60,8 @@ let style = {
 }
 
 const Chart = ({ casesType = "cases", cases, recovered, deaths } ) => {
-  const [data, setData] = useState({});
+  const [data, setData] = useState([]);
+
   useEffect(() => {
     const getCountriesData = async () => {
       const { data } = await axios.get(
@@ -68,16 +69,16 @@ const Chart = ({ casesType = "cases", cases, recovered, deaths } ) => {
       );
 
       let chartData = buildChartData(data, casesType);
-
       setData(chartData);
     };
 
     getCountriesData();
-  }, []);
+  }, [casesType]);
 
   const buildChartData = (data, casesType) => {
+    console.log(data)
     let chartData = [];
-    for (let date in data.cases) {
+    for (let date in data[casesType]) {
         let newDataPoint = {
           x: date,
           y: data[casesType][date],
@@ -85,6 +86,7 @@ const Chart = ({ casesType = "cases", cases, recovered, deaths } ) => {
         };
         chartData.push(newDataPoint);
     }
+    console.log(chartData)
     return chartData;
   };
 
@@ -92,24 +94,23 @@ const Chart = ({ casesType = "cases", cases, recovered, deaths } ) => {
     data.length &&
     <Line
       data={{
-        labels: data.map((data) => data.x),
+        labels: data.map(({x}) => x),
         datasets: [
           {
             label: "Infected",
-            data: data.map((data) => data.y),
+            data: data.map(({y}) => y),
             borderColor: "#3333ff",
             fill: true,
-          }, {
-            data: data.map((data) => data.z),
+          }, 
+          {
             label: 'Deaths',
+            data: data.map(({z}) => z),
             borderColor: 'red',
             backgroundColor: 'rgba(255, 0, 0, 0.5)',
             fill: true,
           },
         ],
       }}
-      width={1000}
-      height={300}
       options={options}
     />
   );
@@ -129,7 +130,7 @@ const Chart = ({ casesType = "cases", cases, recovered, deaths } ) => {
               '#FF6384',
               '#36A2EB',
               '#FFCE56'
-              ],
+            ],
             hoverBackgroundColor: [
             '#FF6384',
             '#36A2EB',

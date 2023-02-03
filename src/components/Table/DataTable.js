@@ -1,12 +1,5 @@
 import * as React from 'react';
-import Paper from '@mui/material/Paper';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
+import { Table, Paper, TableContainer, TableHead, TableBody, TableRow, TableCell, TablePagination, StylesProvider } from '@material-ui/core';
 import { makeStyles } from "@material-ui/core/styles";
 import "./DataTable.scss";
 import numeral from "numeral";  
@@ -26,6 +19,8 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const formatNumber = (value) => numeral(value).format('0,0');
+
 export default function DataTable({ countries }) {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
@@ -40,53 +35,40 @@ export default function DataTable({ countries }) {
     setPage(0);
   };
 
-  //console.log("Table on: ", countries);
-
   return (
-    <Paper  sx={{overflow: 'hidden' }}className={classes.paper} >
+    <Paper className={classes.paper} >
       <TableContainer sx={{ maxHeight: 1220, width: '100%' }}>
         <Table stickyHeader aria-label="sticky table">
-
           <TableHead>
             <TableRow>
               {columns.map((column) => (
-                <TableCell
-                  key={column.id}
-                  align={column.align}
-                >
+                <TableCell key={column.id} align={column.align}>
                   {column.label}
                 </TableCell>
               ))}
             </TableRow>
           </TableHead>
-
           <TableBody>
             {countries
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((country) => {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={country.country}>
-
                     <TableCell align="center" rowSpan={1} className="table-country" style={{ backgroundImage: `url(${country.countryInfo.flag})`}}>
                         {country.countryInfo.iso2}
                     </TableCell>
-
                     <TableCell align="left">
                         <strong>{country.country}</strong>
                     </TableCell>
-
                     <TableCell align="left">
-                        {numeral(country.casesPerOneMillion).format("0,0")}
+                        {formatNumber(country.casesPerOneMillion)}
                     </TableCell>
-
                     <TableCell align="right">
-                        {numeral(country.recoveredPerOneMillion).format("0,0")}
+                        {formatNumber(country.recoveredPerOneMillion)}
                     </TableCell>
-
                     <TableCell align="center">
-                        {numeral(country.deathsPerOneMillion).format("0,0")}
+                        {formatNumber(country.deathsPerOneMillion)}
                     </TableCell>
-
                   </TableRow>
                 );
               })}
