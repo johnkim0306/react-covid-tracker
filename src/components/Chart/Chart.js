@@ -142,14 +142,14 @@ const Chart = ({ casesType = "cases", cases, recovered, deaths } ) => {
         style={style}
         width={1000}
         height={300}
-      /> : null
+      /> : "API request you are trying to make is no longer supported by the API provider and can no longer be used."
   );
 
   return (
     <div className="container chart__container ">
       <div style={style} className="container__piechart">
         <h3>Today's Case</h3>
-        {PieChart}
+        {PieChart} 
       </div>
       <div style={style} className="container__linechart">
         <h3>Total cases</h3>
