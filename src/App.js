@@ -1,16 +1,10 @@
 import React, { useState, useEffect } from "react";
-import "./App.scss";
-import {
-  MenuItem,
-  FormControl,
-  Select,
-  Card,
-  CardContent,
-} from "@material-ui/core";
-import { DataTable, Papers, Header, Sidebar, Contact, Chart, GraphCanada, InfoBox, Map, LineGraph, Footer} from "./components";
+import { MenuItem, FormControl, Select, Card, CardContent } from "@material-ui/core";
+import { DataTable, Papers, Header, Sidebar, Contact, Chart, GraphCanada, InfoBox, Map, LineGraph, Footer } from "./components";
 import { sortData, prettyPrintStat } from "./util";
 import numeral from "numeral";
 import axios from "axios";
+import "./App.scss";
 import "leaflet/dist/leaflet.css";
 
 const App = () => {
@@ -23,67 +17,55 @@ const App = () => {
   const [casesType, setCasesType] = useState("cases");
   const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: -40.4796 });
   const [mapZoom, setMapZoom] = useState(3);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const getWorldData = async () => {
-      const { data } = await axios.get("https://disease.sh/v3/covid-19/all");
+    const getData = async () => {
+      const worldData = await axios.get("https://disease.sh/v3/covid-19/all");
+      const countriesData = await axios.get("https://disease.sh/v3/covid-19/countries");
+
+      setCountryInfo(worldData.data);
+      setCountries(countriesData.data.map((country) => ({
+        name: country.country,
+        value: country.countryInfo.iso2,
+      })));
+      setMapCountries(countriesData.data);
+      setTableData(sortData(countriesData.data));
+      setLoading(false);
+    };
+    getData();
+  }, []);
+
+  const handleCountryChange = async (countryCode) => {
+    try {
+      setLoading(true);
+      setInputCountry(countryCode);
+      const data = await fetchCountryData(countryCode);
       setCountryInfo(data);
-    };
-
-    getWorldData();
-  }, []);
-
-  useEffect(() => {
-    const getCountriesData = async () => {
-      const { data } = await axios.get(
-        "https://disease.sh/v3/covid-19/countries"
+      setCountryName(data.country);
+      setMapZoom(countryCode === "worldwide" ? 3 : 4);
+      setMapCenter(
+        countryCode === "worldwide"
+          ? { lat: 34.80746, lng: -40.4796 }
+          : { lat: data.countryInfo.lat, lng: data.countryInfo.long }
       );
-
-      const countries = data.map((country) => ({
-        name: country.country, // United States, United Kindom
-        value: country.countryInfo.iso2, // striping UK, USA, FR
-      }));
-
-      let sortedData = sortData(data);
-      setCountries(countries);
-      setMapCountries(data);
-      setTableData(sortedData);
-    };
-
-    getCountriesData();
-  }, []);
-
-  const onCountryChange = async (country) => {
-    const countryCode = await country;
-
-    const url =
-      countryCode === "worldwide"
-        ? "https://disease.sh/v3/covid-19/all"
-        : `https://disease.sh/v3/covid-19/countries/${countryCode}`;
-
-    const { data } = await axios.get(url);
-
-    setInputCountry(countryCode);
-    setCountryInfo(data);
-    setCountryName(data.country);
-    setMapZoom(4);
-    if (countryCode === "worldwide") {
-      setMapCenter({ lat: 34.80746, lng: -40.4796 });
-      setMapZoom(3);
-    } else {
-      setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
+      setLoading(false);      
+    } catch (error) {
+      console.error(error);
     }
   };
 
-  const activateCanada = () => {
-    console.log("activating Canada data");
-    onCountryChange("CA");
+  const fetchCountryData = async (countryCode) => {
+    const url = countryCode === "worldwide"
+      ? "https://disease.sh/v3/covid-19/all"
+      : `https://disease.sh/v3/covid-19/countries/${countryCode}`;
+  
+    const { data } = await axios.get(url);
+    return data;
   };
 
-  const activateWorldWide = () => {
-    console.log("activating Canada data");
-    onCountryChange("worldwide");
-  };
+  const activateCanada = () => handleCountryChange("CA");
+  const activateWorldWide = () => handleCountryChange("worldwide");
 
   return (
     <div className="app">
@@ -91,19 +73,15 @@ const App = () => {
       <Papers />
       <div className="app__middle">
         <div className="container">
-          <Sidebar
-            activateCanada={activateCanada}
-            activateWorldWide={activateWorldWide}
-          />
+          <Sidebar activateCanada={activateCanada} activateWorldWide={activateWorldWide}/>
         </div>
-
         <div className="app__body">
           <div className="app__header">
             <FormControl className="app__dropdown">
               <Select
                 variant="outlined"
                 value={country}
-                onChange={(e) => onCountryChange(e.target.value)}
+                onChange={(e) => handleCountryChange(e.target.value)}
               >
                 <MenuItem value="worldwide">Worldwide</MenuItem>
                 {countries.map((country) => (
