@@ -3,14 +3,15 @@ import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LanguageRoundedIcon from '@mui/icons-material/LanguageRounded';
-import { makeStyles } from "@material-ui/core/styles";
+// import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@mui/styles';
 import './Sidebar.scss';
 
 const useStyles = makeStyles(theme => ({
   button: {
     height: theme.spacing(7),
-    variant: 'outlined',
-    color: 'secondary',
+    borderColor: theme.palette.secondary.main,
+    color: theme.palette.secondary.main,
     width: '100%'
 }}));
 

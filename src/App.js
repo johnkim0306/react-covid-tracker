@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { MenuItem, FormControl, Select, Card, CardContent } from "@material-ui/core";
+// import { MenuItem, FormControl, Select, Card, CardContent } from "@material-ui/core";
+import { MenuItem, FormControl, Select, Card   } from '@mui/material';
+import { CardContent } from '@mui/joy';
 import { DataTable, Papers, Header, Sidebar, Contact, Chart, GraphCanada, InfoBox, Map, LineGraph, Footer } from "./components";
 import { sortData, prettyPrintStat } from "./util";
 import numeral from "numeral";

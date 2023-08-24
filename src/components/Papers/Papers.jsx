@@ -1,7 +1,9 @@
 import React from "react";
-import { Paper } from "@material-ui/core";
+// import { Paper } from "@material-ui/core";
+import { Paper } from '@mui/material';
 import Typography from '@mui/material/Typography';
-import { makeStyles } from "@material-ui/core/styles";
+// import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@mui/styles';
 import useMediaQuery from '@mui/material/useMediaQuery'
 import CalendarMonthRoundedIcon from '@mui/icons-material/CalendarMonthRounded';
 import CoronavirusRoundedIcon from '@mui/icons-material/CoronavirusRounded';
@@ -78,7 +80,7 @@ export default () => {
   const isMobile = useMediaQuery("(max-width: 600px)");
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
         <Paper elevation={10} className = {isMobile ?  classes.paper : classes.paper } >
           <div className={classes.papers__footer}>
             <div className={classes.papers__footer__left}>
@@ -110,6 +112,6 @@ export default () => {
           </div>
         </Paper>
         <br />
-    </>
+    </ThemeProvider>
   );
 };
