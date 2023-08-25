@@ -75,7 +75,7 @@ theme.typography.h5 = {
 };
 
 
-export default () => {
+const Papers = () => {
   const classes = useStyles();
   const isMobile = useMediaQuery("(max-width: 600px)");
 
@@ -115,3 +115,5 @@ export default () => {
     </ThemeProvider>
   );
 };
+
+export default Papers;

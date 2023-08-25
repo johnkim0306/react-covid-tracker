@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 // import { MenuItem, FormControl, Select, Card, CardContent } from "@material-ui/core";
 import { MenuItem, FormControl, Select, Card   } from '@mui/material';
-import { CardContent } from '@mui/joy';
+import CardContent from '@mui/material/CardContent';
 import { DataTable, Papers, Header, Sidebar, Contact, Chart, GraphCanada, InfoBox, Map, LineGraph, Footer } from "./components";
 import { sortData, prettyPrintStat } from "./util";
 import numeral from "numeral";
@@ -93,71 +93,78 @@ const App = () => {
             </FormControl>
           </div>
 
-          <div className="app__body-map">
-            <Card className="app__right">
-              <CardContent>
-                <div className="app__information">
-                  <h3>Live Cases by Country</h3>
-                  <DataTable countries={tableData} />
-                </div>
-              </CardContent>
-            </Card>
+          {loading ? (
+            <div className="loading">Loading...</div>
+          ) : (
+            <>
+            <div className="app__body-map">
+              <Card className="app__right">
+                <CardContent>
+                  <div className="app__information">
+                    <h3>Live Cases by Country</h3>
+                    <DataTable countries={tableData} />
+                  </div>
+                </CardContent>
+              </Card>
 
-            <Map
-              countries={mapCountries}
-              casesType={casesType}
-              center={mapCenter}
-              zoom={mapZoom}
-            />
-          </div>
-
-          <div className="app__stats">
-            <InfoBox
-              onClick={(e) => setCasesType("cases")}
-              title="Coronavirus Cases"
-              isRed
-              active={casesType === "cases"}
-              cases={prettyPrintStat(countryInfo.todayCases)}
-              total={numeral(countryInfo.cases).format("0.0a")}
-            />
-            <InfoBox
-              onClick={(e) => setCasesType("recovered")}
-              title="Recovered"
-              active={casesType === "recovered"}
-              cases={prettyPrintStat(countryInfo.todayRecovered)}
-              total={numeral(countryInfo.recovered).format("0.0a")}
-            />
-            <InfoBox
-              onClick={(e) => setCasesType("deaths")}
-              title="Deaths"
-              isRed
-              active={casesType === "deaths"}
-              cases={prettyPrintStat(countryInfo.todayDeaths)}
-              total={numeral(countryInfo.deaths).format("0.0a")}
-            />
-          </div>
-
-          <div className="app__graph">
-            <h3>
-              {countryName} new {casesType}
-            </h3>
-            {countryName === "Canada" ? (
-              <GraphCanada casesType={casesType} countryName={countryName} />
-            ) : (
-              <LineGraph casesType={casesType} countryName={countryName} />
-            )}
-            <div className="graph">
-              <Chart
+              <Map
+                countries={mapCountries}
                 casesType={casesType}
-                recovered={countryInfo.todayRecovered}
-                deaths={countryInfo.todayDeaths}
-                cases={countryInfo.todayCases}
+                center={mapCenter}
+                zoom={mapZoom}
               />
             </div>
-          </div>
 
-          <Contact />
-          <Footer />
+            <div className="app__stats">
+              <InfoBox
+                onClick={(e) => setCasesType("cases")}
+                title="Coronavirus Cases"
+                isRed
+                active={casesType === "cases"}
+                cases={prettyPrintStat(countryInfo.todayCases)}
+                total={numeral(countryInfo.cases).format("0.0a")}
+              />
+              <InfoBox
+                onClick={(e) => setCasesType("recovered")}
+                title="Recovered"
+                active={casesType === "recovered"}
+                cases={prettyPrintStat(countryInfo.todayRecovered)}
+                total={numeral(countryInfo.recovered).format("0.0a")}
+              />
+              <InfoBox
+                onClick={(e) => setCasesType("deaths")}
+                title="Deaths"
+                isRed
+                active={casesType === "deaths"}
+                cases={prettyPrintStat(countryInfo.todayDeaths)}
+                total={numeral(countryInfo.deaths).format("0.0a")}
+              />
+            </div>
+
+            <div className="app__graph">
+              <h3>
+                {countryName} new {casesType}
+              </h3>
+              {countryName === "Canada" ? (
+                <GraphCanada casesType={casesType} countryName={countryName} />
+              ) : (
+                <LineGraph casesType={casesType} countryName={countryName} />
+              )}
+              <div className="graph">
+                <Chart
+                  casesType={casesType}
+                  recovered={countryInfo.todayRecovered}
+                  deaths={countryInfo.todayDeaths}
+                  cases={countryInfo.todayCases}
+                />
+              </div>
+            </div>
+
+            <Contact />
+            <Footer />
+            </>
+          )}
+
         </div>
       </div>
     </div>
