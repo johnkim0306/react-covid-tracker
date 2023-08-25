@@ -5,7 +5,7 @@ import logo from "../../images/disease.png";
 const Header = () => {
   return (
     <nav className="nav">
-      <img src={logo} className="nav--icon"></img>
+      <img src={logo} className="nav--icon" alt="Logo"></img>
       <h1 className="nav--logo_text">COVID-19 Worldwide</h1>   
     </nav>
   );

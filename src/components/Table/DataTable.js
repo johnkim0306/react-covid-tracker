@@ -1,6 +1,9 @@
 import * as React from 'react';
-import { Table, Paper, TableContainer, TableHead, TableBody, TableRow, TableCell, TablePagination, StylesProvider } from '@material-ui/core';
-import { makeStyles } from "@material-ui/core/styles";
+// import { Table, Paper, TableContainer, TableHead, TableBody, TableRow, TableCell, TablePagination, StylesProvider } from '@material-ui/core';
+import { Table, TableContainer, TableHead, TableBody, TableRow, TableCell, TablePagination } from '@mui/material';
+import Paper from '@mui/material/Paper';
+// import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@mui/styles';
 import "./DataTable.scss";
 import numeral from "numeral";  
 
