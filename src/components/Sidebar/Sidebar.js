@@ -31,10 +31,8 @@ const Sidebar = ({activateCanada, activateWorldWide }) => {
         <div className="btn-group">
           <Button variant="outlined" color="secondary" size="large" href="https://github.com/johnkim0306/react-covid-tracker" className={classes.button}><GitHubIcon />Github</Button>
           <Button variant="outlined" color="secondary" size="large" href="http://www.google.com" className={classes.button}><LanguageRoundedIcon />Portfolio</Button>
+          <Button variant="outlined" color="secondary" size="large" href="#contact" className={classes.button} endIcon={<SendIcon />}>Contact</Button>
         </div>
-        <a href="#contact">
-          <Button variant="outlined" color="secondary" size="large" className={classes.button} endIcon={<SendIcon />}>Contact</Button>
-        </a>
     </div>
   );
 };
