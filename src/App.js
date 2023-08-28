@@ -72,13 +72,13 @@ const App = () => {
   return (
     <div className="app">
       <Header />
-      <Papers />
-      <div className="app__middle">
+      <Papers country={country} handleCountryChange={handleCountryChange} countries={countries} className="z-30"/>
+      <div className="app__middle top-20">
         <div className="container">
           <Sidebar activateCanada={activateCanada} activateWorldWide={activateWorldWide}/>
         </div>
         <div className="app__body z-20">
-          <div className="app__header">
+          {/* <div className="app__header">
             <FormControl className="app__dropdown">
               <Select
                 variant="outlined"
@@ -91,7 +91,7 @@ const App = () => {
                 ))}
               </Select>
             </FormControl>
-          </div>
+          </div> */}
 
           {loading ? (
             <div className="loading">Loading...</div>
@@ -161,12 +161,12 @@ const App = () => {
             </div>
 
             <Contact />
-            <Footer />
             </>
           )}
 
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

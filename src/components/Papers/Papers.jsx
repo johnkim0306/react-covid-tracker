@@ -8,6 +8,8 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 import CalendarMonthRoundedIcon from '@mui/icons-material/CalendarMonthRounded';
 import CoronavirusRoundedIcon from '@mui/icons-material/CoronavirusRounded';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { MenuItem, FormControl, Select, Card   } from '@mui/material';
+
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -75,12 +77,12 @@ theme.typography.h5 = {
 };
 
 
-const Papers = () => {
+const Papers = ({handleCountryChange, country, countries}) => {
   const classes = useStyles();
   const isMobile = useMediaQuery("(max-width: 600px)");
 
   return (
-    <section className="relative w-full top-20 z-10 mx-auto">
+    <section className="relative w-full top-20 z-30 mx-auto">
       <ThemeProvider theme={theme}>
         <Paper elevation={10} className={isMobile ? classes.paper : classes.paper} >
           <div className={classes.papers__footer}>
@@ -95,6 +97,21 @@ const Papers = () => {
                 </ThemeProvider>
               </div>
             </div>
+
+
+            <FormControl className="app__dropdown">
+              <Select
+                variant="outlined"
+                value={country}
+                onChange={(e) => handleCountryChange(e.target.value)}
+              >
+                <MenuItem value="worldwide">Worldwide</MenuItem>
+                {countries.map((country) => (
+                  <MenuItem value={country.value}>{country.name}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+
 
             <div className={classes.papers__calendar}>
               <div>
