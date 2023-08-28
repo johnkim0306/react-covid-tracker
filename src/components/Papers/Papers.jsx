@@ -7,11 +7,11 @@ import { makeStyles } from '@mui/styles';
 import useMediaQuery from '@mui/material/useMediaQuery'
 import CalendarMonthRoundedIcon from '@mui/icons-material/CalendarMonthRounded';
 import CoronavirusRoundedIcon from '@mui/icons-material/CoronavirusRounded';
-import {createTheme,ThemeProvider} from '@mui/material/styles';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const useStyles = makeStyles(theme => ({
   paper: {
-    display:'flex',
+    display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-end',
     padding: theme.spacing(2),
@@ -21,26 +21,26 @@ const useStyles = makeStyles(theme => ({
     borderRadius: 12
   },
   papers__footer: {
-    display:'flex',
+    display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'flex-end'
   },
   papers__footer__left: {
-    display:'flex'
+    display: 'flex'
   },
   papers__calendar: {
-    display:'flex',
+    display: 'flex',
     flexDirection: 'column'
   },
   papers__calendar__text: {
-    display:'flex'
+    display: 'flex'
   },
   paperContainer: {
     backgroundImage: 'logo192.png'
   },
   papers__text: {
-    display:'flex',
+    display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-end',
     "@media (max-width: 600px)": {
@@ -80,17 +80,18 @@ const Papers = () => {
   const isMobile = useMediaQuery("(max-width: 600px)");
 
   return (
-    <ThemeProvider theme={theme}>
-        <Paper elevation={10} className = {isMobile ?  classes.paper : classes.paper } >
+    <section className="relative w-full top-20 z-10 mx-auto">
+      <ThemeProvider theme={theme}>
+        <Paper elevation={10} className={isMobile ? classes.paper : classes.paper} >
           <div className={classes.papers__footer}>
             <div className={classes.papers__footer__left}>
-    
-                <CoronavirusRoundedIcon sx={ isMobile? { width: '4rem', height: '3rem'} : { width: '9rem', height: '8rem' } } className={classes.largeIcon}/>
+
+              <CoronavirusRoundedIcon sx={isMobile ? { width: '4rem', height: '3rem' } : { width: '9rem', height: '8rem' }} className={classes.largeIcon} />
 
               <div className={classes.papers__text}>
                 <ThemeProvider theme={theme}>
-                  <Typography variant="h5" style={{color: 'white'}}>The Covid-19 Tracker</Typography>
-                  <Typography sx={{ display: 'flex',justifyContent: 'space-between'}}variant="h5" color="primary">Click on a country name</Typography>
+                  <Typography variant="h5" style={{ color: 'white' }}>The Covid-19 Tracker</Typography>
+                  <Typography sx={{ display: 'flex', justifyContent: 'space-between' }} variant="h5" color="primary">Click on a country name</Typography>
                 </ThemeProvider>
               </div>
             </div>
@@ -98,21 +99,22 @@ const Papers = () => {
             <div className={classes.papers__calendar}>
               <div>
                 <ThemeProvider theme={theme}>
-                  <Typography variant="h5" style={{color: 'white'}}>Last Updated:</Typography>
+                  <Typography variant="h5" style={{ color: 'white' }}>Last Updated:</Typography>
                 </ThemeProvider>
               </div>
               <div className={classes.papers__calendar__text}>
-                <CalendarMonthRoundedIcon/>
+                <CalendarMonthRoundedIcon />
                 <Typography color="textSecondary">
-                      {" "}
-                      {new Date().toLocaleString() + ""}
+                  {" "}
+                  {new Date().toLocaleString() + ""}
                 </Typography>
               </div>
             </div>
           </div>
         </Paper>
         <br />
-    </ThemeProvider>
+      </ThemeProvider>
+    </section>
   );
 };
 
