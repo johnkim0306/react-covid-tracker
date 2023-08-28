@@ -5,11 +5,15 @@ import { ThemeProvider } from '@mui/material/styles'; // Import ThemeProvider
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import theme from './theme'; // Import your Material-UI theme configuration
+import { BrowserRouter } from 'react-router-dom'; // Import BrowserRouter
+
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
     <React.StrictMode>
-      <App />
+    <BrowserRouter>
+    <App />
+  </BrowserRouter>,
     </React.StrictMode>,
   </ThemeProvider>,
   document.getElementById('root')

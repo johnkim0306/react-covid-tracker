@@ -77,7 +77,7 @@ const App = () => {
         <div className="container">
           <Sidebar activateCanada={activateCanada} activateWorldWide={activateWorldWide}/>
         </div>
-        <div className="app__body">
+        <div className="app__body z-20">
           <div className="app__header">
             <FormControl className="app__dropdown">
               <Select
