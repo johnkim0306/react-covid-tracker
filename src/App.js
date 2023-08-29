@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import { MenuItem, FormControl, Select, Card, CardContent } from "@material-ui/core";
 import { MenuItem, FormControl, Select, Card   } from '@mui/material';
 import CardContent from '@mui/material/CardContent';
 import { DataTable, Papers, Header, Sidebar, Contact, Chart, GraphCanada, InfoBox, Map, LineGraph, Footer } from "./components";
@@ -78,21 +77,6 @@ const App = () => {
           <Sidebar activateCanada={activateCanada} activateWorldWide={activateWorldWide}/>
         </div>
         <div className="app__body z-20">
-          {/* <div className="app__header">
-            <FormControl className="app__dropdown">
-              <Select
-                variant="outlined"
-                value={country}
-                onChange={(e) => handleCountryChange(e.target.value)}
-              >
-                <MenuItem value="worldwide">Worldwide</MenuItem>
-                {countries.map((country) => (
-                  <MenuItem value={country.value}>{country.name}</MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </div> */}
-
           {loading ? (
             <div className="loading">Loading...</div>
           ) : (

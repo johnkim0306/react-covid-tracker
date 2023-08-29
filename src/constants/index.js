@@ -4,8 +4,8 @@
       title: "About",
     },
     {
-      id: "work",
-      title: "Work",
+      id: "Diagnosis",
+      title: "Diagnosis",
     },
     {
       id: "contact",

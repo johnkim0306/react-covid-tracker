@@ -6,15 +6,21 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import theme from './theme'; // Import your Material-UI theme configuration
 import { BrowserRouter } from 'react-router-dom'; // Import BrowserRouter
+import { Route, Routes } from "react-router-dom";
+import Diagnosis from "./pages/Diagnosis"; // Import the default export
 
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
     <React.StrictMode>
-    <BrowserRouter>
-    <App />
-  </BrowserRouter>,
-    </React.StrictMode>,
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="/Diagnosis" element={<Diagnosis />} />
+          {/* Define more routes as needed */}
+        </Routes>
+      </BrowserRouter>
+    </React.StrictMode>
   </ThemeProvider>,
   document.getElementById('root')
 );

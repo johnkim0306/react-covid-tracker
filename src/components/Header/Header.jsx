@@ -53,14 +53,19 @@ const Header = () => {
         </Link>
       </div>
       <ul className='list-none hidden sm:flex flex-row gap-10 bg-metal'>
-        {navLinks.map((nav) => (
+        {navLinks.map((nav, index) => (
           <li
             key={nav.id}
             className={`${active === nav.title ? "bg-metal" : "text-secondary"
               } hover:text-slate-300 text-[18px] font-medium cursor-pointer`}
             onClick={() => setActive(nav.title)}
           >
-            <a href={`#${nav.id}`}>{nav.title}</a>
+            {index === 2 ? (
+              // <Link to={`#${nav.id}`}>{nav.title}</Link>
+              <a href={`/#${nav.id}`}>{nav.title}</a>
+            ) : (
+              <Link to="/Diagnosis">{nav.title}</Link>
+            )}
           </li>
         ))}
       </ul>
