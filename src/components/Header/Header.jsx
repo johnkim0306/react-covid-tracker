@@ -14,11 +14,27 @@ const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [toggle, setToggle] = useState(false);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      if (scrollTop > 100) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <nav
       className={`${styles.paddingX
-        } w-full flex items-center py-5 fixed top-0 z-30 ${scrolled ? "bg-primary" : "bg-transparent"
-        }`}
+        } w-full flex items-center py-5 fixed top-0 z-40 ${
+          scrolled ? "bg-metal border-b-2 border-primary" : "bg-transparent"
+        } border-b-0.1 border-solid border-opacity-25 border-black`}
     >
       <div className='w-full flex justify-between items-center max-w-7xl mx-auto'>
         <Link
@@ -36,12 +52,12 @@ const Header = () => {
           </p>
         </Link>
       </div>
-      <ul className='list-none hidden sm:flex flex-row gap-10'>
+      <ul className='list-none hidden sm:flex flex-row gap-10 bg-metal'>
         {navLinks.map((nav) => (
           <li
             key={nav.id}
-            className={`${active === nav.title ? "text-white" : "text-secondary"
-              } hover:text-white text-[18px] font-medium cursor-pointer`}
+            className={`${active === nav.title ? "bg-metal" : "text-secondary"
+              } hover:text-slate-300 text-[18px] font-medium cursor-pointer`}
             onClick={() => setActive(nav.title)}
           >
             <a href={`#${nav.id}`}>{nav.title}</a>
@@ -67,7 +83,7 @@ const Header = () => {
                 <li
                   key={nav.id}
                   className={`font-poppins font-medium cursor-pointer text-[16px] ${
-                    active === nav.title ? "text-white" : "text-secondary"
+                    active === nav.title ? "bg-purple" : "text-secondary"
                   }`}
                   onClick={() => {
                     setToggle(!toggle);

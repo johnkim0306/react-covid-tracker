@@ -29,7 +29,7 @@ const Navbar = () => {
     <nav
       className={`${
         styles.paddingX
-      } w-full flex items-center py-5 fixed top-0 z-20 ${
+      } w-full flex items-center py-5 fixed top-0 z-40 ${
         scrolled ? "bg-primary" : "bg-transparent"
       }`}
     >
@@ -54,7 +54,7 @@ const Navbar = () => {
             <li
               key={nav.id}
               className={`${
-                active === nav.title ? "text-white" : "text-secondary"
+                active === nav.title ? "bg-purple" : "text-secondary"
               } hover:text-white text-[18px] font-medium cursor-pointer`}
               onClick={() => setActive(nav.title)}
             >
