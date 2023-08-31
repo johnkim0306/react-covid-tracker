@@ -56,7 +56,7 @@ const Header = () => {
         {navLinks.map((nav, index) => (
           <li
             key={nav.id}
-            className={`${active === nav.title ? "bg-metal" : "text-secondary"
+            className={`${active === nav.title ? "bg-metal2" : "text-secondary"
               } hover:text-slate-300 text-[18px] font-medium cursor-pointer`}
             onClick={() => setActive(nav.title)}
           >
@@ -88,7 +88,7 @@ const Header = () => {
                 <li
                   key={nav.id}
                   className={`font-poppins font-medium cursor-pointer text-[16px] ${
-                    active === nav.title ? "bg-purple" : "text-secondary"
+                    active === nav.title ? "bg-metal2" : "text-secondary"
                   }`}
                   onClick={() => {
                     setToggle(!toggle);

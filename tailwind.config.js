@@ -9,6 +9,7 @@ module.exports = {
         secondary: "#050816",
         'purple': '#3f3cbb',
         'metal': '#f9f9f9',
+        'metal2': '#f5f0f0',
         tertiary: "#151030",
         "black-100": "#100d25",
         "black-200": "#090325",

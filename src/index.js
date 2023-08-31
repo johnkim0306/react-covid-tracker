@@ -2,23 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import { ThemeProvider } from '@mui/material/styles'; // Import ThemeProvider
-import App from './App';
+import {App} from './App';
 import * as serviceWorker from './serviceWorker';
 import theme from './theme'; // Import your Material-UI theme configuration
 import { BrowserRouter } from 'react-router-dom'; // Import BrowserRouter
-import { Route, Routes } from "react-router-dom";
-import Diagnosis from "./pages/Diagnosis"; // Import the default export
-
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
     <React.StrictMode>
       <BrowserRouter>
-        <Routes>
-          <Route exact path="/" element={<App />} />
-          <Route path="/Diagnosis" element={<Diagnosis />} />
-          {/* Define more routes as needed */}
-        </Routes>
+        <App />
       </BrowserRouter>
     </React.StrictMode>
   </ThemeProvider>,
