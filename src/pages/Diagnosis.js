@@ -1,12 +1,21 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
+// import Radio from '@mui/material/Radio';
+// import RadioGroup from '@mui/material/RadioGroup';
+// import FormControlLabel from '@mui/material/FormControlLabel';
+// import FormControl from '@mui/material/FormControl';
+// import FormLabel from '@mui/material/FormLabel';
+import {
+  FormControl,
+  FormLabel,
+  RadioGroup,
+  FormControlLabel,
+  Button,
+  Radio
+} from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import './Diagnosis.scss';
+import { useState } from 'react';
 
 
 const BpIcon = styled('span')(({ theme }) => ({
@@ -51,7 +60,6 @@ const BpCheckedIcon = styled(BpIcon)({
   },
 });
 
-// Inspired by blueprintjs
 function BpRadio(props) {
   return (
     <Radio
@@ -82,26 +90,91 @@ const theme = createTheme({
 
 
 const Diagnosis = () => {
+  const [error, setError] = React.useState(false);
+  const [details, setDetails] = useState({
+    name: "",
+    email: "",
+    gender: "", // Initialize with default value
+    fever: '', // Default fever
+    throat: '',
+  })
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setDetails((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  // const handleRadioChange = (event) => {
+  //   setDetails((prevDetails) => ({
+  //     ...prevDetails,
+
+  //   }))
+  //   setValue(event.target.value);
+  //   setHelperText(' ');
+  //   setError(false);
+  // };
+
+  const handleSubmit = () => {
+    // Pass the details to another component or perform some action
+    console.log('Details1:', details);
+  };
+
   return (
-    <FormControl>
-      <FormLabel id="demo-customized-radios">Gender</FormLabel>
-      <RadioGroup
-        row
-        defaultValue="female"
-        aria-labelledby="demo-customized-radios"
-        name="customized-radios"
-      >
-        <FormControlLabel theme={theme} value="female"  control={<BpRadio />} label="Female" />
-        <FormControlLabel theme={theme} value="male" control={<BpRadio />} label="Male" />
-        <FormControlLabel theme={theme} value="other" control={<BpRadio />} label="Other" />
-        <FormControlLabel
-          value="disabled"
-          disabled
-          control={<BpRadio />}
-          label="(Disabled option)"
-        />
-      </RadioGroup>
-    </FormControl>
+    <div>
+      <h2>Diagnosis Form</h2>
+      <form>
+        <FormControl error={error} variant="standard">
+          <FormLabel id="demo-customized-radios">Gender</FormLabel>
+          <RadioGroup
+            row
+            value={details.gender} // Bind the value to the state
+            onChange={handleInputChange} // Handle change event
+            defaultValue="female"
+            aria-labelledby="demo-customized-radios"
+            name="customized-radios"
+          >
+            <FormControlLabel theme={theme} value="female" control={<BpRadio />} label="Female" />
+            <FormControlLabel theme={theme} value="male" control={<BpRadio />} label="Male" />
+          </RadioGroup>
+        </FormControl>
+
+        <FormControl variant="standard">
+          <FormLabel id="demo-customized-radios">Fever</FormLabel>
+          <RadioGroup
+            row
+            value={details.fever}
+            onChange={handleInputChange}
+            aria-labelledby="demo-customized-radios"
+            name="fever"
+          >
+            <FormControlLabel theme={theme} value="yes" control={<Radio />} label="Yes" />
+            <FormControlLabel theme={theme} value="no" control={<Radio />} label="No" />
+          </RadioGroup>
+        </FormControl>
+
+        <FormControl component="fieldset">
+          <FormLabel  theme={theme} id="demo-customized-radios">Sore Throat</FormLabel>
+          <RadioGroup
+            row
+            aria-label="sore-throat"
+            name="sore-throat"
+            value={details.soreThroat}
+            onChange={handleInputChange}
+          >
+            <FormControlLabel theme={theme} value="yes" control={<Radio />} label="Yes" />
+            <FormControlLabel theme={theme} value="no" control={<Radio />} label="No" />
+          </RadioGroup>
+        </FormControl>
+
+        <Button variant="contained" onClick={handleSubmit}>
+          Submit
+        </Button>
+      </form>
+    </div>
+
   );
 }
 export default Diagnosis; 
