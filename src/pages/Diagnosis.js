@@ -123,7 +123,7 @@ const Diagnosis = () => {
 
   return (
     <div>
-      <h2>Diagnosis Form</h2>
+      <h2 style={{ width: '60%', padding: '20px', color: 'black' }}>Diagnosis Form</h2>
       <form>
         <FormControl error={error} variant="standard">
           <FormLabel id="demo-customized-radios">Gender</FormLabel>
@@ -137,6 +137,21 @@ const Diagnosis = () => {
           >
             <FormControlLabel theme={theme} value="female" control={<BpRadio />} label="Female" />
             <FormControlLabel theme={theme} value="male" control={<BpRadio />} label="Male" />
+          </RadioGroup>
+        </FormControl>
+
+        <FormControl error={error} variant="standard">
+          <FormLabel id="demo-customized-radios">Is your Age 65 or above?</FormLabel>
+          <RadioGroup
+            row
+            value={details.age} // Bind the value to the state
+            onChange={handleInputChange} // Handle change event
+            // defaultValue="female"
+            aria-labelledby="demo-customized-radios"
+            name="age"
+          >
+            <FormControlLabel theme={theme} value="Yes" control={<BpRadio />} label="Yes" />
+            <FormControlLabel theme={theme} value="No" control={<BpRadio />} label="No" />
           </RadioGroup>
         </FormControl>
 
